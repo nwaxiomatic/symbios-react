@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/symbios-react/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/symbios-react/static/js/main.21d20f88.chunk.js",
+    "main.js.map": "/symbios-react/static/js/main.21d20f88.chunk.js.map",
+    "runtime-main.js": "/symbios-react/static/js/runtime-main.6fd25ea2.js",
+    "runtime-main.js.map": "/symbios-react/static/js/runtime-main.6fd25ea2.js.map",
+    "static/js/2.dda85100.chunk.js": "/symbios-react/static/js/2.dda85100.chunk.js",
+    "static/js/2.dda85100.chunk.js.map": "/symbios-react/static/js/2.dda85100.chunk.js.map",
+    "static/js/3.75de4605.chunk.js": "/symbios-react/static/js/3.75de4605.chunk.js",
+    "static/js/3.75de4605.chunk.js.map": "/symbios-react/static/js/3.75de4605.chunk.js.map",
+    "index.html": "/symbios-react/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/symbios-react/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.dda85100.chunk.js.LICENSE.txt": "/symbios-react/static/js/2.dda85100.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/symbios-react/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6fd25ea2.js",
+    "static/js/2.dda85100.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.21d20f88.chunk.js"
+  ]
+}
