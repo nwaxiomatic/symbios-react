@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+import Portfolio from './components/Portfolio'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+const renderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest);
+  return (
+    React.createElement(component, finalProps)
+  );
+}
+
+const PropsRoute = ({ component, ...rest }) => {
+  return (
+    <Route {...rest} render={routeProps => {
+      return renderMergedProps(component, routeProps, rest);
+    }}/>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter 
+      // history={browserHistory}
+      // basename={'symbios-react'}
+    >
+      <Switch>
+        <PropsRoute exact path="/" title="Home" component={Portfolio} />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App;
