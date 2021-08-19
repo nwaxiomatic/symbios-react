@@ -7,26 +7,37 @@ import { getFlickrImg } from 'FlickrAPI.js'
 import { getSoundCloudImg, scIF, scURL } from 'SoundCloudAPI.js'
 import { getVimeoImg, viF } from 'VimeoAPI.js'
 import { getYTImg } from 'YouTubeAPI.js'
+import { getBCImg } from 'BandcampAPI.js'
+
+import BandcampPlayer from 'react-bandcamp'
 
 import buildUrl from 'build-url'
+
+import 'static/styles/teaser.scss'
 
 // var SC = require('static/scripts/sc.js')
 
 class SquareImg extends Component {
 
   render(){
-    const { img } = this.props
+    const { img, data } = this.props
     if(img)
       return (
         <div 
-          className="postPrevTile"
+          className="teaser-square"
           style={{ 
             backgroundImage: 'url(\"' + img.src + '\")',
             backgroundSize: 'cover',
             backgroundPosition: 'center', 
             backgroundRepeat: 'no-repeat'
           }}
-        />
+        >
+          <div 
+            className="description"
+          >
+            {data.blurb}
+          </div>
+        </div>
       )
       else
         return <Spinner animation="border" />
@@ -47,7 +58,7 @@ class PostPreview extends Component {
 
   componentDidMount() {
     const { content, data, img, SC, Vimeo } = this.props
-    const { title, image, video, audio, sound } = data
+    const { title, image, video, audio, sound, bandcamp } = data
 
     if(!img && image){
       getFlickrImg(image, "Medium", (img) => this.imgLoaded(img))
@@ -67,6 +78,11 @@ class PostPreview extends Component {
         video, (img) => this.imgLoaded(img)
       )
     }
+    else if(!img && bandcamp){
+      getBCImg(
+        bandcamp, (img) => this.imgLoaded(img)
+      )
+    }
     else if(img){
       this.setState({img: img})
     }
@@ -84,19 +100,23 @@ class PostPreview extends Component {
   render(){
     const { img } = this.state
     const { content, data } = this.props
-    const { title, image, video, sound } = data
+    const { title, image, video, sound, bandcamp } = data
     return (
       <Col 
         xs={12}
         sm={6}
         md={4}
+        lg={3}
+        xl={2}
+        className="post-teaser"
       >
-        <div className="postPrevTileContainer">
+        <div className="teaser-square-container">
             <SquareImg 
+              data={data}
               img={img}
             />
         </div>
-        <div className="postPrevTitle">
+        <div className="post-title">
           {title}
         </div>
         {img ? '' : 
@@ -106,12 +126,13 @@ class PostPreview extends Component {
             src={scIF + '?url=' + scURL + '123'}
             style={{'display':'block', 'visibility':'hidden'}}
           /> : ''
-          // video && !video.youtube ?
+          // bandcamp ?
           // <iframe 
           //   ref={this.iRef} 
-          //   src={viF + video.id}
+          //   src={bandcamp.url}
           //   style={{'display':'block', 'visibility':'hidden'}}
           // /> : ''
+          // <BandcampPlayer album={bandcamp.id} /> : ''
         }
       </Col>
     )

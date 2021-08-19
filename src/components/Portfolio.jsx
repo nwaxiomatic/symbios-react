@@ -4,7 +4,7 @@ import PostPreview from 'components/PostPreview'
 import TagSelector from 'components/TagSelector'
 import { Container, Row } from 'react-bootstrap'
 
-import 'static/styles/main.css'
+import 'static/styles/main.scss'
 
 import * as matter from 'gray-matter'
 
@@ -38,7 +38,10 @@ mdFiles.sort((a, b) => b.filename.localeCompare(a.filename))
 let tagsList = []
 mdFiles.forEach( 
   file => {
-    tagsList.push(...file.data.categories.split(","))
+    file.data.categories = file.data.categories.split(",").map(
+        tag => tag.trim()
+    )
+    tagsList.push(...file.data.categories)
   }
 )
 tagsList = [...new Set(tagsList)]
@@ -107,7 +110,7 @@ class Portfolio extends Component {
         />
       return file
     }).filter((post) => 
-      findCommonElements(post.data.categories.split(','), tagFilter)
+      findCommonElements(post.data.categories, tagFilter)
     )
   }
 
@@ -132,7 +135,7 @@ class Portfolio extends Component {
     const { tagFilter, tagSelect, selectedTags } = this
      let thing = this.state.posts.filter((post) => 
      {
-        let cats = post.data.categories.split(',')
+        let cats = post.data.categories
         return findCommonElements(
           cats, 
           tagFilter

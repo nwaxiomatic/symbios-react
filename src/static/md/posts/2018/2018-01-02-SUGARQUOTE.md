@@ -2,7 +2,7 @@
 layout: media
 title: "SUGARQUOTE"
 categories: aural
-excerpt: "SUGARQUOTE"
+blurb: "SUGARQUOTE"
 ads: false
 share: false
 sound:

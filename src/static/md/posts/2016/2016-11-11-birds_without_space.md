@@ -2,11 +2,11 @@
 layout: media
 title: "birds_without_space"
 categories: visual
-excerpt: "birds_without_space"
+blurb: "birds_without_space"
 ads: false
 share: false
 show_url: true
-show_excerpt: true
+show_blurb: true
 video:
   id: 190726475
 photoset: 

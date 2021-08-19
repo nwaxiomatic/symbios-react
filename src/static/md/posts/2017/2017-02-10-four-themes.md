@@ -2,8 +2,8 @@
 layout: media
 title: "Four Themes"
 categories: visual
-excerpt: "Four Themes"
-show_excerpt: true
+blurb: "Four Themes"
+show_blurb: true
 ads: false
 share: false
 show_url: true

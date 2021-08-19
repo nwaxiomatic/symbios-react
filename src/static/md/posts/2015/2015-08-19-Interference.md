@@ -2,7 +2,7 @@
 layout: media
 title: "Isomov - Interference LP"
 categories: audio
-excerpt: "Isomov - Interference LP"
+blurb: "Isomov - Interference LP"
 sound:
   type: playlists
   id: 50449667

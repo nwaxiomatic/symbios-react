@@ -2,8 +2,8 @@
 layout: media
 title: "Portraits of Scourge"
 categories: visual
-excerpt: "Portraits of Scourge"
-show_excerpt: true
+blurb: "Portraits of Scourge"
+show_blurb: true
 ads: false
 share: false
 show_url: true

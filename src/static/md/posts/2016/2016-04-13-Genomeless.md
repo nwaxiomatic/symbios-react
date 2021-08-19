@@ -1,7 +1,7 @@
 ---
 layout: media
 title: "Genomeless"
-excerpt:
+blurb:
 categories: visual
 ads: false
 share: false

@@ -2,11 +2,11 @@
 layout: media
 title: "Flamin' Hot Rainforests"
 categories: visual
-excerpt: "Flamin' Hot Rainforests"
+blurb: "Flamin' Hot Rainforests"
 ads: false
 share: false
 show_url: true
-show_excerpt: true
+show_blurb: true
 video:
   id: 168680173
 ---

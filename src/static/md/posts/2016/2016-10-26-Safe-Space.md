@@ -2,8 +2,8 @@
 layout: media
 title: "Safe Spaces"
 categories: visual
-excerpt: "Safe Spaces"
-show_excerpt: true
+blurb: "Safe Spaces"
+show_blurb: true
 ads: false
 share: false
 show_url: false

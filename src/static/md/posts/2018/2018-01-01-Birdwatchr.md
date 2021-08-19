@@ -2,7 +2,7 @@
 layout: media
 title: "Dj Birdwatchr"
 categories: aural
-excerpt: "Dj Birdwathchr"
+blurb: "Dj Birdwathchr"
 ads: false
 share: false
 sound:

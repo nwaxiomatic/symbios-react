@@ -1,12 +1,12 @@
 ---
 layout: media
 title: "Tsaik - Tehraj (Video Stills)"
-excerpt: "Tsaik - Tehraj (Video Stills)"
+blurb: "Tsaik - Tehraj (Video Stills)"
 categories: visual
 ads: false
 share: false
 show_url: true
-show_excerpt: true
+show_blurb: true
 image:
   id: 22135868008
   teaser: 22135868008

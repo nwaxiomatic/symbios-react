@@ -2,7 +2,7 @@
 layout: media
 title: "Snowflake"
 categories: visual
-excerpt: "Snowflake"
+blurb: "Snowflake"
 ads: false
 share: false
 show_url: false
