@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "DIE YUPPIE SCUM"
-categories: visual
+tags:
+  categories: visual
 blurb: "DIE YUPPIE SCUM"
 show_blurb: true
 ads: false

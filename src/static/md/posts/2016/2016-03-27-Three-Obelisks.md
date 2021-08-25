@@ -1,10 +1,10 @@
 ---
 layout: media
 title: "One and Three Obelisks"
-categories: physical
+tags:
+  categories: physical
 image:
   id: 26440895873
-  teaser: 26440895873
 video:
   id: 166769667
 ---

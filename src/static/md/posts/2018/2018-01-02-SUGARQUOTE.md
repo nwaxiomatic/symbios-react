@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "SUGARQUOTE"
-categories: aural
+tags:
+  categories: aural
 blurb: "SUGARQUOTE"
 ads: false
 share: false

@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Portraits of Scourge"
-categories: visual
+tags:
+  categories: visual
 blurb: "Portraits of Scourge"
 show_blurb: true
 ads: false

@@ -26,6 +26,9 @@ export var getSoundCloudImg = function(SC, iframe, sound, imgLoaded) {
       callback: () => {
       
       widget.getCurrentSound((music) => {
+        if(!music.artwork_url){
+          return false
+        }
         let artwork_url = music.artwork_url.replace('-large', '-t500x500')
         let img = new Image()
         img.onload = function() {

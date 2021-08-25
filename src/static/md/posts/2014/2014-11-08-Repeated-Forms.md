@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Repeated Forms of Discontinuity Rotating in Place"
-categories: visual
+tags:
+  categories: visual
 blurb: "Repeated Forms of Discontinuity Rotating in Place"
 ads: false
 share: false

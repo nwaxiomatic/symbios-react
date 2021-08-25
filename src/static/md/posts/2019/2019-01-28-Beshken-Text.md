@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "BESHKEN Logo"
-categories: visual
+tags:
+  categories: visual
 blurb: "Generative lettering effects done in Touchdesigner."
 show_blurb: true
 ads: false

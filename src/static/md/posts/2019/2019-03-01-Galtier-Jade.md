@@ -1,12 +1,15 @@
 ---
 layout: media
-title: "Galtier - Jade Pillar feat Recluse"
-categories: visual
-blurb: "This piece utilizes my custom braid font as well as various differential growth techniques."
-show_blurb: true
+title: "Jade Pillar"
+tags:
+  categories: 3d
 ads: false
 share: false
 show_url: false
+show_excerpt: true
+client: "Galtier, Nostro Hood System"
+blurb: "Cover art utilizing a custom Huffman-optimized lettering and various differential growth techniques."
+showmore: false
 image:
-  id: 46719179364
+  id: 40476506313
 ---

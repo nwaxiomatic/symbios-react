@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Multi-Scale Turing Pattern with 6-Fold Symmetry"
-categories: visual
+tags:
+  categories: visual
 blurb: 
 ads: false
 share: false

@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Safe Spaces"
-categories: visual
+tags:
+  categories: visual
 blurb: "Safe Spaces"
 show_blurb: true
 ads: false

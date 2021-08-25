@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "if u close yr eyes u can hear the music better"
-categories: visual
+tags:
+  categories: visual
 blurb: "if u close yr eyes u can hear the music better"
 ads: false
 share: false

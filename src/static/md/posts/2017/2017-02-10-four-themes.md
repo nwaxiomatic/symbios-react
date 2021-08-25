@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Four Themes"
-categories: visual
+tags:
+  categories: visual
 blurb: "Four Themes"
 show_blurb: true
 ads: false

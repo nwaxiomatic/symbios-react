@@ -1,0 +1,218 @@
+@import "static/styles/neumorph"; 
+
+$railFrac: .1;
+$railThick: $railFrac * 100%;
+$knobSize: 20vh;
+
+$circleSize: 4vh;
+$circlePerc: .6;
+$rotRad: $knobSize * (1-2*$railFrac) - $circleSize * 1;
+$circleFix: $circleSize * (1-$circlePerc) / 2;
+
+$tsInner-z: 200;
+
+@keyframes spin {
+  100% {
+    transform:rotate(1turn) translate($rotRad/2) rotate(-1turn);
+  }
+}
+.tagKnobs {
+  width: 22vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // background: white;
+  z-index: 10;
+
+  animation-name: rainbow;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.tagSelector {
+  width: $knobSize;
+  height: $knobSize;
+  position: relative;
+  top: 10vmin;
+  left: 10vmin;
+  // z-index: 99999;
+  margin-bottom: 30vmin;
+  margin-right: 0;
+  // z-index: 1;
+}
+
+.tagSelectOuter{
+  border-radius: 50%;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 1;
+
+  transform: translate(-25%, -25%);
+
+  // animation-name: rainbow-inset-shadow;
+  // animation-duration: $rainbowTime;
+  // animation-timing-function: ease-in-out;
+  // animation-iteration-count: infinite;
+}
+
+.tagSelectInner {
+  position: absolute;
+  top: $railThick;
+  left: $railThick;
+  width: 100% - 2 * $railThick;
+  height: 100% - 2 * $railThick;
+  border-radius: 50%;
+
+  // z-index: $tsInner-z;
+
+  animation-name: rainbow;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.tagSelectInner::before, .tagSelectInner::after {
+  content: '';
+  border-radius: inherit;
+  position: absolute;
+  z-index: $tsInner-z - 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  box-shadow: 
+        $h1 $h1 $blur1 hsl(0,$shadSat,$valDark), 
+        -1*$h1 -1*$h1 $blur1 hsl(0,$lightSat,$valLight);
+}
+
+.tagSelectInner::before {
+  mix-blend-mode: saturation;
+}
+
+.tagSelectInner::after {
+  mix-blend-mode: luminosity;
+}
+
+.tagSelectInnerTitle {
+  $xOffset: $rotRad - $circleSize;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $xOffset;
+  height: $xOffset;
+  border-radius: 50%;
+
+  z-index: 10;
+
+  transform: translate(-50%, -50%);
+
+  animation-name: rainbow-inset-shadow-md, rainbow;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+// .tagSelectCircle{
+//   width: 100%;
+//   height: 100%;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//    z-index: 1;
+//    animation:spin 4s linear infinite;
+// }
+
+.tagSelectCircle{
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: $knobSize / 2 - $circleSize /2 + $circleFix;
+  left: $knobSize/2 - $circleSize /2 + $circleFix;
+  border-radius: 50%;
+  width: $circleSize * $circlePerc;
+  height: $circleSize * $circlePerc;
+  // background: white;
+  // transform: translate(50%, 0%);
+  transform:rotate(0) translate($rotRad/2) rotate(0);
+}
+
+.cTop {
+    z-index: 9;
+}
+
+.cBottom {
+    z-index: 10;
+}
+
+.cTop {
+  animation-name: rainbow, spin;
+  animation-duration: $rainbowTime, 10s;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
+}
+
+.cBottom {
+  animation-name: rainbow-shadow-sm, spin;
+  animation-duration: $rainbowTime, 10s;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
+}
+
+.tagKnob {
+  width: 100%;
+  height: 100%;
+  position: default;
+  z-index: 10000;
+}
+
+.tagSelectInnerTitleText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  overflow-wrap: break-word;
+  font-size: 1.2em;
+}
+
+.tagItem, .tagSelectInnerTitleText {
+  display: block;
+  position: absolute;
+  z-index: 10000;
+
+  text-align: center;
+
+}
+
+.tagSelectInnerTitleText svg {
+  transform: scale(1.5);
+
+ animation-name: rainbow-svg;
+  animation-duration: $rainbowTime, 10s;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
+
+}
+
+.tagSelected {
+  animation-name: rainbow-text-invert;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.tagItem button, .tagSelectInnerTitleText {
+  animation-name: rainbow-text;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  // text-shadow : 2px 2px 4px hsl(50, 0, 60), -2px -2px 4px hsl(50, 0, 100);
+  font-weight: 700;
+}

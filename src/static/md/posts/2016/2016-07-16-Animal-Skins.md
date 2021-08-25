@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Animal Skins"
-categories: visual
+tags:
+  categories: visual
 blurb: "Animal Skins"
 show_blurb: true
 ads: false

@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "ny is killin me"
-categories: visual
+tags:
+  categories: visual
 blurb: "ny is killin me"
 show_blurb: true
 ads: false

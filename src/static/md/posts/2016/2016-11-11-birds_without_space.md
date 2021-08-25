@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "birds_without_space"
-categories: visual
+tags:
+  categories: visual
 blurb: "birds_without_space"
 ads: false
 share: false

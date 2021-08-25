@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Flamin' Hot Rainforests"
-categories: visual
+tags:
+  categories: visual
 blurb: "Flamin' Hot Rainforests"
 ads: false
 share: false

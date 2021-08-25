@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Snowflake"
-categories: visual
+tags:
+  categories: visual
 blurb: "Snowflake"
 ads: false
 share: false

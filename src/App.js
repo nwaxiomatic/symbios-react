@@ -3,8 +3,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Portfolio from './components/Portfolio'
 
+import GoogleFontLoader from 'react-google-font-loader'
+
 // import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
+// import 'bootstrap/dist/js/bootstrap.min.js'
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
@@ -27,9 +29,17 @@ function App() {
       // history={browserHistory}
       // basename={'symbios-react'}
     >
+      <GoogleFontLoader
+        fonts={[
+          {
+            font: 'Space Mono',
+          },
+        ]}
+      />
       <Switch>
         <PropsRoute exact path="/" title="Home" component={Portfolio} />
       </Switch>
+      <div className="bg-grad"/>
     </BrowserRouter>
   )
 }

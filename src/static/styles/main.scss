@@ -9,13 +9,20 @@ body {
   margin: 0;
   padding: 0;
 /*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
-  // background: #fff;
+  // background: #b8c1c1;
   background-attachment: fixed;
   background-size: cover;
-  font-family: "Courier New", Courier, monospace;
+  // font-family: "Courier New", Courier, monospace;
+  font-family: 'Space Mono', monospace;
   cursor: cell;
+  // height: 100vh;
   // color: white;
+  overscroll-behavior-y: none;
 }
+
+// #root, .container {
+//   height: 100%;
+// }
 
 button, input[type="submit"], input[type="reset"] {
   background: none;
@@ -27,7 +34,44 @@ button, input[type="submit"], input[type="reset"] {
   outline: inherit;
 }
 
-.tagSelected {
-  background: black;
-  color: white;
+// .tagSelected {
+//   background: black;
+//   color: white;
+// }
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.hidden {
+  opacity: 0;
+  transition: all 1s;
+}
+
+
+.shown {
+  opacity: 1;
+  transition: all 1s;
+}
+
+// .portfolio {
+//   position: static;
+//   top: 0;
+//   left: 0;
+//   height: 100vh !important; 
+//   width: 100vw !important;
+//   overflow: scroll !important;
+// }
+
+// .infinite-scroll-component {
+//   min-height: 200vh;
+// }
+
+.TagSelector{
+  background: rgba(0, 0, 0, 0);
 }

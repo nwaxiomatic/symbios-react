@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "PERFECTION IS FOREVER"
-categories: visual
+tags:
+  categories: visual
 blurb: "PERFECTION IS FOREVER - A generative sketch based on code by Will Eastcott utilizing a 3D body scan of myself. [LINK](https://playcanv.as/b/IG8afQfZ/)"
 show_blurb: true
 ads: false

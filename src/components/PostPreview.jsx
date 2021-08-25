@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import ReactPlayer from 'react-player'
-import { Col, Spinner } from 'react-bootstrap';
+import { Col, Spinner } from 'react-bootstrap'
 
 import { getFlickrImg } from 'FlickrAPI.js'
 import { getSoundCloudImg, scIF, scURL } from 'SoundCloudAPI.js'
@@ -9,38 +9,86 @@ import { getVimeoImg, viF } from 'VimeoAPI.js'
 import { getYTImg } from 'YouTubeAPI.js'
 import { getBCImg } from 'BandcampAPI.js'
 
+import { FaBiohazard } from 'react-icons/fa'
+
 import BandcampPlayer from 'react-bandcamp'
 
 import buildUrl from 'build-url'
 
-import 'static/styles/teaser.scss'
-
 // var SC = require('static/scripts/sc.js')
+
+const spinnerTime = 2
 
 class SquareImg extends Component {
 
   render(){
-    const { img, data } = this.props
-    if(img)
+    const { img, data, animDelay, animLength } = this.props
+    // if(img)
       return (
+        <span>
+
+         <span className={"spinners-all " + (img ? 'hidden-spin' :'')}>
+              <span className="center spin-loader spinny-shadow">
+                 <FaBiohazard
+                  className="spinny spinny-shadow-svg"
+                  style={animDelay([spinnerTime])}
+                /> 
+              </span>
+              <span className="center spin-loader spinny-refl">
+                <FaBiohazard
+                  className="spinny spinny-refl-svg"
+                  style={animDelay([spinnerTime])}
+                /> 
+              </span>
+
+              <span className="center spin-loader">
+                <FaBiohazard
+                  className="spinny spinny-top-svg"
+                  style={animDelay([animLength, spinnerTime])}
+                />
+              </span>
+          </span>
+          
+
         <div 
-          className="teaser-square"
-          style={{ 
-            backgroundImage: 'url(\"' + img.src + '\")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center', 
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
-          <div 
-            className="description"
+            className="teaser-square"
+            style={animDelay([animLength])}
           >
-            {data.blurb}
+          
+
+          <span className={"hidden " + (img ? 'shown' :'')}>
+            <div className='teaser-square-cover' />
+            { img ? 
+            <div
+              className='teaser-img'
+              style={{ 
+                backgroundImage: 'url(\"' + img.src + '\")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center', 
+                backgroundRepeat: 'no-repeat'
+              }}
+            /> : ''}
+            <div 
+              className="description"
+            >
+              {data.blurb}
+            </div>
+            </span>
+
           </div>
-        </div>
-      )
-      else
-        return <Spinner animation="border" />
+
+           <div 
+              className='teaser-square-shadow saturation' 
+              style={animDelay([animLength])}
+            />
+             <div 
+              className='teaser-square-shadow luminosity' 
+              style={animDelay([animLength])}
+            />
+
+          
+          </span>
+        )
   }
 }
 
@@ -50,10 +98,19 @@ class PostPreview extends Component {
     img: null
   }
 
+   animLength = 1
+   firstTime = 0
+
   constructor(props) {
     super(props)
 
     this.iRef = React.createRef()
+    this.imgRef = React.createRef()
+    this.animLength = parseFloat(
+      getComputedStyle(document.body).animationDuration
+    )
+    this.firstTime = this.props.getTime()
+    // console.log(this.animLength)
   }
 
   componentDidMount() {
@@ -90,31 +147,56 @@ class PostPreview extends Component {
 
   imgLoaded = (img) => {
     const { saveImage } = this.props
-    // console.log(img)
-    this.setState({img:img}, ()=>{
-      // console.log(img)
-      saveImage(img)
+    saveImage(img)
+    if(this.checkIfMounted()){
+      this.setState({img:img})
+    }
+  }
+
+  checkIfMounted = () => {
+     return this.imgRef.current != null;
+  }
+
+  animDelay = (animLength, getTimeAgain = false) => {
+    const { getTime } = this.props
+    const theTime = getTimeAgain ? getTime() : this.firstTime;
+    let animDelayStr = ''
+    let animSec = animLength.map((item) => {
+      // console.log(item)
+      return ((-theTime)%item).toString() + 's'
     })
+  // console.log(animSec.join(', '))
+    return { 
+      animationDelay: animSec.join(', ')
+    }
   }
 
   render(){
     const { img } = this.state
-    const { content, data } = this.props
+    const { content, data, getTime } = this.props
     const { title, image, video, sound, bandcamp } = data
+    const { animDelay, animLength } = this
+
     return (
       <Col 
         xs={12}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={2}
+        md={6}
+        lg={4}
+        xl={3}
         className="post-teaser"
+        ref={this.imgRef} 
       >
-        <div className="teaser-square-container">
+        <div 
+          className="teaser-square-container"
+          
+        >
             <SquareImg 
               data={data}
               img={img}
+              animDelay={animDelay}
+              animLength={animLength}
             />
+           
         </div>
         <div className="post-title">
           {title}

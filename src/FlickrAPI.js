@@ -21,12 +21,23 @@ export var getFlickrImg = function(image, size, imgLoaded) {
   fetch(generateApiUrl(image, size))
   .then(response => response.json())
   .then((response) => {
+    if(response.stat == 'fail'){
+    console.log(image)
+    console.log(response)
+  }
     let imgSrc = response.sizes.size.filter(
       obj => {
         return obj.label === size
       }
     )
-    // console.log(imgSrc)
+    if(imgSrc.length == 0){
+      imgSrc = response.sizes.size.filter(
+        obj => {
+          return obj.label === "Thumbnail"
+        }
+      )
+    }
+    // console.log(response.sizes.size)
     imgSrc = imgSrc[0].source
     let img = new Image()
     img.onload = function() {

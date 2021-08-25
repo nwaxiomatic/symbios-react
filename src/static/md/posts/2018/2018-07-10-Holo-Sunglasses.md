@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Wasp and Orchid Sunglasses"
-categories: visual
+tags:
+  categories: visual
 blurb: "A prototype of sunglasses made using Denisyuk Holography featuring a wasp and an orchid, alluding to Deleuze and Guattari"
 show_blurb: true
 ads: false

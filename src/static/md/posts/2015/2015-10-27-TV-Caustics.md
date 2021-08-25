@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "TV Caustics"
-categories: visual
+tags:
+  categories: visual
 blurb: 
 ads: false
 share: false

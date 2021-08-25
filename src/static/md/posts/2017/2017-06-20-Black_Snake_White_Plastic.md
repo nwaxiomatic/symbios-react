@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Black Snake, White Plastic"
-categories: visual
+tags:
+  categories: visual
 blurb: "Black Snake, White Plastic"
 ads: false
 share: false

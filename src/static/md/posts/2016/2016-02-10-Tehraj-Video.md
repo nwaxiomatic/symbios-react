@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Tsaik - Tehraj (Official Video)"
-categories: visual
+tags:
+  categories: visual
 blurb: 
 ads: false
 share: false

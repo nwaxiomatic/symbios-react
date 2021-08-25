@@ -2,7 +2,8 @@
 layout: media
 title: "Genomeless"
 blurb:
-categories: visual
+tags:
+  categories: visual
 ads: false
 share: false
 image:

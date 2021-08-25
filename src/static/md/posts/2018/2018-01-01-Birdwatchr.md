@@ -1,7 +1,8 @@
 ---
 layout: media
 title: "Dj Birdwatchr"
-categories: aural
+tags:
+  categories: aural
 blurb: "Dj Birdwathchr"
 ads: false
 share: false

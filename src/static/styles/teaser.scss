@@ -1,10 +1,109 @@
-$hover-time: .3s;
-$desc-pad: 10%;
-$teaser-rad: 15%;
-$hover-rad: 1%;
-$teaser-width: 90%;
-$hover-width: 100%;
-$desc-size: 2 vmin;
+@import "static/styles/neumorph";
+
+$transform-teaser: -($teaser-width - $hover-width)/2;
+
+body{
+  background-color: hsl($hueMin, $sat, $val);
+  animation-duration: $rainbowTime;
+}
+// .bg-rainbow  {
+//   animation-name: rainbow;
+//   animation-duration: $rainbowTime;
+//   animation-timing-function: ease-in-out;
+//   animation-iteration-count: infinite;
+
+//   z-index: -999;
+// }
+
+$spin-off: 4%;
+$spin-blur: .18;
+$spin-time: 2s;
+
+@keyframes spinny { 100% {transform: rotate(360deg);}}
+@keyframes spinny-shadow { 100% {transform: translate($spin-off, $spin-off) rotate(360deg) ;}}
+@keyframes spinny-refl { 100% {transform: translate(-1*$spin-off, -1*$spin-off) rotate(360deg) ;}}
+.spinny {
+  // transform:rotate(0deg);
+  // animation: 4s linear infinite spinny;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 53%;
+}
+.spinny-top-svg{
+  animation-name: rainbow-fill, spinny;
+  animation-duration: $rainbowTime, $spin-time;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
+}
+
+.spin-loader {
+  width: 30%;
+  height: 30%;
+}
+
+.spinners-all {
+  z-index: 1000;
+}
+
+.spinny-shadow-svg{
+  transform: translate($spin-off, $spin-off) rotate(0deg) ;
+  animation: $spin-time linear infinite spinny-shadow;
+  fill: hsl(0,$shadSat,$valDark);
+  // filter: drop-shadow(0 0 $blur1*$spin-blur hsl(0,$shadSat,$valDark));
+}
+
+.spinny-shadow, .spinny-refl {
+  mix-blend-mode: luminosity;
+  filter: blur($blur1*$spin-blur);
+}
+
+.spinny-refl-svg{
+  transform: translate(-$spin-off, -$spin-off) rotate(0deg) ;
+  animation: $spin-time linear infinite spinny-refl;
+  fill: hsl(0,$lightSat,$valLight+.5*$valDelta);
+  
+}
+
+.hidden-spin svg {
+  fill: rgba(0,0,0,0);
+  transition: all 1s;
+  visibility: hidden;
+}
+
+.bg-grad {
+  // background-image: linear-gradient(
+  //   135deg, 
+  //   hsl(0, 0, $val + $valDelta) 0%, 
+  //   hsl(0, 0, $val - $valDelta) 100%
+  // );
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: -998;
+
+  background-blend-mode: luminosity; 
+
+  animation-name: rainbow;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.row {
+  padding: 60px;
+  overflow-x: hidden;
+}
+
+.infinite-scroll-component {
+  overflow-x: hidden !important;
+}
+
+.post-teaser {
+  overflow: visible;
+}
 
 .teaser-square-container {
   width: 100%;
@@ -12,7 +111,10 @@ $desc-size: 2 vmin;
   padding: 0;
    padding-bottom: 100%;
    cursor: crosshair;
-   // overflow: hidden;
+   position: relative;
+   overflow: visible;
+
+   background: rgba(0, 0, 0, 0);
 }
 
 .teaser-text {
@@ -29,26 +131,96 @@ $desc-size: 2 vmin;
   border-radius: $teaser-rad;
   border: 0px solid white;
   margin: auto;
-  transform: translateY(-($teaser-width - $hover-width)/2);
+  transform: translateY($transform-teaser);
 }
 
 .teaser-square:hover {
-  top: $desc-pad;
   width: $hover-width;
   padding-bottom: $hover-width;
-  box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  transition: all $hover-time;
   border-radius: $hover-rad;
-  margin-top: 0%;
   transform: translateY(0);
-  // margin-bottom: -($teaser-width - $hover-width)/2;
+}
+
+
+.luminosity {
+  mix-blend-mode: luminosity;
+  z-index: -5;
+}
+.saturation {
+  mix-blend-mode: saturation;
+  z-index: -6;
+}
+.teaser-square-shadow {
+  content: '';
+  display: block;
+  width: $teaser-width;
+  height: $teaser-width;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: translate($transform-teaser, $transform-teaser);
+
+  border-radius: $teaser-rad;
+  transition: all $hover-time;
+
+  box-shadow: 
+        
+        -1*$h1 -1*$h1 $blur1 hsl(180,$lightSat,$valLight),
+        $h1 $h1 $blur1 hsl(180,$shadSat,$valDark);
+}
+
+
+.teaser-square:hover ~ .teaser-square-shadow {
+  border-radius: $hover-rad;
+  width: $hover-width;
+  height: $hover-width;
+  transform: translate(0, 0);
+}
+
+.teaser-square-cover {
+  background: white;
+  opacity: 0;
+  transition: $hover-time;
+  width: 100%;
+  height: 100%;
+  // z-index: -1;
+  position: absolute;
+
+  mix-blend-mode: normal;
+}
+
+.teaser-square:hover .teaser-square-cover {
+  opacity: .2;
+}
+
+.teaser-img {
+  width: 100% * $img-ratio;
+  height: 100% * $img-ratio;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: $teaser-rad;// * $img-ratio;
+  // z-index: -10;
+  transition: $hover-time;
+  opacity: 1;
+
+  mix-blend-mode: normal;
+}
+
+.teaser-square:hover .teaser-img, {
+  border-radius: $hover-rad * $img-ratio;
+  opacity: .16;
 }
 
 .post-title {
   padding-left: $desc-pad;
   padding-right: $desc-pad;
-  margin-bottom: 2em;
+  margin-top: .5em;
+  margin-bottom: 2.5em;
   text-align: center;
+  font-weight: bold;
 }
 
 // .post-teaser:hover .post-title {
@@ -56,13 +228,25 @@ $desc-size: 2 vmin;
 // }
 
 .teaser-square .description {
-  z-index: 100;
+  // z-index: 10;
   height: 100vh;
   width: 100%;
   transition: all $hover-time/2;
   overflow: hidden;
-  background-color:rgba(0, 0, 0, 0.8);
-  color: white;
+
+  overflow-wrap: break-word;
+
+  mix-blend-mode: normal;
+
+  // background: linear-gradient(
+  //   135deg, 
+  //   rgba(255, 255, 255, .5) 0%, 
+  //   rgba(0, 0, 0, .5) 100%
+  // );
+
+  background: rgba(0, 0, 0, 0);
+
+  color: black;
   opacity: 0;
   padding: $desc-pad  + ($teaser-width - $hover-width)/2;
   font-size: $desc-size;
@@ -80,7 +264,7 @@ $desc-size: 2 vmin;
   // overflow: scroll;
   opacity: 1;
   padding: $desc-pad;
-  padding-top: $desc-pad*.75 ;
+  padding-top: $desc-pad*.8 ;
 }
 
 .client {
