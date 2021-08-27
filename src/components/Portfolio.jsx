@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import ReactMarkdown from 'react-markdown'
 import PostPreview from 'components/PostPreview'
 import TagSelector from 'components/TagSelector'
+import SymbiosLoader from 'components/SymbiosLoader'
 
 import { Container, Row, Col } from 'react-bootstrap'
 import InfiniteScrollFix from 'components/InfiniteScrollFix'
@@ -202,7 +203,10 @@ class Portfolio extends Component {
           />
         )}
         </div>*/}
-        <div  className="portfolio">
+        <SymbiosLoader
+          getTime={getTime}
+        />
+        {/*<div  className="portfolio">
         {posts.length > 0 &&
           <InfiniteScrollFix
             dataLength={numPosts}
@@ -229,7 +233,7 @@ class Portfolio extends Component {
             </Row>
 
           </InfiniteScrollFix>}
-          </div>
+          </div>*/}
       </Container>
       
     )

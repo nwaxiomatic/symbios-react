@@ -1,5 +1,15 @@
 @import "static/styles/neumorph";
 
+$hover-time: .3s;
+$desc-pad: 13%;
+$teaser-rad: 50%;
+$hover-rad: 14%;
+$teaser-width: 100%;
+$hover-width: 100%;
+$desc-size: 2 vmin;
+
+$img-ratio: .91;
+
 $transform-teaser: -($teaser-width - $hover-width)/2;
 
 body{
@@ -134,22 +144,13 @@ $spin-time: 2s;
   transform: translateY($transform-teaser);
 }
 
-.teaser-square:hover {
+.teaser-square:hover, .teaser-square:active {
   width: $hover-width;
   padding-bottom: $hover-width;
   border-radius: $hover-rad;
   transform: translateY(0);
 }
 
-
-.luminosity {
-  mix-blend-mode: luminosity;
-  z-index: -5;
-}
-.saturation {
-  mix-blend-mode: saturation;
-  z-index: -6;
-}
 .teaser-square-shadow {
   content: '';
   display: block;
@@ -171,7 +172,7 @@ $spin-time: 2s;
 }
 
 
-.teaser-square:hover ~ .teaser-square-shadow {
+.teaser-square:hover ~ .teaser-square-shadow, .teaser-square:active ~ .teaser-square-shadow  {
   border-radius: $hover-rad;
   width: $hover-width;
   height: $hover-width;
@@ -190,7 +191,7 @@ $spin-time: 2s;
   mix-blend-mode: normal;
 }
 
-.teaser-square:hover .teaser-square-cover {
+.teaser-square:hover .teaser-square-cover, .teaser-square:active .teaser-square-cover {
   opacity: .2;
 }
 
@@ -209,7 +210,7 @@ $spin-time: 2s;
   mix-blend-mode: normal;
 }
 
-.teaser-square:hover .teaser-img, {
+.teaser-square:hover .teaser-img, .teaser-square:active .teaser-img {
   border-radius: $hover-rad * $img-ratio;
   opacity: .16;
 }

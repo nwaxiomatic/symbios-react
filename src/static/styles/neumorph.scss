@@ -1,20 +1,10 @@
-$hover-time: .3s;
-$desc-pad: 13%;
-$teaser-rad: 50%;
-$hover-rad: 14%;
-$teaser-width: 94%;
-$hover-width: 100%;
-$desc-size: 2 vmin;
-
-$img-ratio: .91;
-
 $h1: 6px;
 $blur1: 18px;
 $colLight: hsl(50, 0, 100);
 $colDark: #9ca4a4;
 
 $sat: 80;
-$shadSat: 60;
+$shadSat: 50;
 $lightSat: 90;
 $val: 88;
 $valDelta: 6;
@@ -27,6 +17,15 @@ $hueMin: 100;
 $hueMax: 200;
 
 $hueSteps: 6;
+
+.luminosity, .luminosity path {
+  mix-blend-mode: luminosity;
+  z-index: -5;
+}
+.saturation, .saturation path {
+  mix-blend-mode: saturation;
+  z-index: -6;
+}
 
 // .hidden-neu {
 //   opacity: 0;
@@ -91,6 +90,12 @@ $hueSteps: 6;
   }
 }
 
+@mixin drop-shadow($amt) {
+  filter: 
+    drop-shadow( $h1*$amt*3 $h1*$amt*3 $blur1*abs($amt) hsl(0, $shadSat, $valDark) ) 
+    drop-shadow( -1*$h1*$amt*3 -1*$h1*$amt*3 $blur1*abs($amt) hsl(0, $lightSat, $valLight) );
+}
+
 @mixin rainbow-drop-shadow($amt) {
   @for $i from 0 through $hueSteps {
     #{$i / $hueSteps * 100%} {
@@ -136,6 +141,10 @@ $hueSteps: 6;
 @keyframes rainbow-svg {
   @include rainbow('fill');
   @include rainbow-drop-shadow(.05);
+}
+@keyframes rainbow-svg-symbios {
+  @include rainbow('fill');
+  @include rainbow-drop-shadow(.2);
 }
 @keyframes rainbow-text {
   @include rainbow('color');

@@ -1,0 +1,66 @@
+@import "static/styles/neumorph";
+
+$fade-time: 2s;
+
+.cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  // z-index: 9999;
+
+  z-index: -100;
+
+  animation-name: rainbow;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.symbios-svg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all $fade-time ease-in;
+  // fill: white;
+  animation-name: rainbow-fill;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.symbios-svg path{
+  transition: $fade-time filter linear;
+-webkit-transition: $fade-time -webkit-filter linear;
+-moz-transition: $fade-time -moz-filter linear;
+-ms-transition: $fade-time -ms-filter linear;
+-o-transition: $fade-time -o-filter linear;
+}
+
+// .hidden-neu {
+//   opacity: 0;
+// }
+
+
+// .shown-neu {
+//   opacity: 1;
+// }
+
+.hidden-neu path{
+  filter: 
+        drop-shadow( 0 0 0 hsl(0, $shadSat, $valDark) ) 
+        drop-shadow( 0 0 0 hsl(0, $lightSat, $valLight) );
+}
+
+
+.shown-neu path{
+  @include drop-shadow(.15);
+}
+
+// .symbios-svg path{
+//   fill: black;
+//   opacity: 1;
+// }

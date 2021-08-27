@@ -5,7 +5,7 @@ function intentionalScrollTop (event) {
   return document.body.scrollTop === 0 && event.deltaY < 0;
 }
   
-function intentionalScrollBottom (event) {
+function intentionalScrollBottom (deltaY) {
   // console.log('window.innerHeight')
   // console.log(window.innerHeight)
   // console.log('window.scrollY')
@@ -16,10 +16,12 @@ function intentionalScrollBottom (event) {
   // console.log(event.deltaY)
   // console.log('(window.innerHeight + window.scrollY) >= document.body.offsetHeight')
   // console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
-  return (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && event.deltaY > 0;
+  return (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY > 0;
 }
 
 class InfiniteScrollFix extends InfiniteScroll {
+
+  touchStartY = 0
 
   onScrollListener = (event) => {
     if (typeof this.props.onScroll === 'function') {
@@ -86,12 +88,22 @@ class InfiniteScrollFix extends InfiniteScroll {
     // }
 
     if (this.el) {
-      this.el.addEventListener('wheel', (event) => {
-        // console.log('run')
-        if(intentionalScrollBottom(event)) {
-
-         this.throttledOnScrollListener(event)
-         // console.log('overscroll')
+      this.el.addEventListener('wheel', (e) => {
+        if(intentionalScrollBottom(e.deltaY)) {
+         this.throttledOnScrollListener(e)
+        }
+      })
+      this.el.addEventListener('touchstart', (e) => {
+        let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent
+        let touch = evt.touches[0] || evt.changedTouches[0]
+        this.touchStartY = touch.clientY
+      })
+      this.el.addEventListener('touchend', (e) => {
+        let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent
+        let touch = evt.touches[0] || evt.changedTouches[0]
+        let touchEndY = touch.clientY
+        if(intentionalScrollBottom(this.touchStartY - touchEndY)) {
+         this.throttledOnScrollListener(e)
         }
       })
     }

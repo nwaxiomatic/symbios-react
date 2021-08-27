@@ -9,7 +9,9 @@ import { getVimeoImg, viF } from 'VimeoAPI.js'
 import { getYTImg } from 'YouTubeAPI.js'
 import { getBCImg } from 'BandcampAPI.js'
 
-import { FaBiohazard } from 'react-icons/fa'
+import { 
+  FaBiohazard, FaRadiationAlt, FaSeedling, FaYinYang, FaTrangenderAlt, FaLeaf
+} from 'react-icons/fa'
 
 import BandcampPlayer from 'react-bandcamp'
 
