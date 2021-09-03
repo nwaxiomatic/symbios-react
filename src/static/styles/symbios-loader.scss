@@ -1,7 +1,5 @@
 @import "static/styles/neumorph";
 
-$fade-time: 2s;
-
 .cover {
   position: fixed;
   top: 0;
@@ -24,7 +22,9 @@ $fade-time: 2s;
   left: 0;
   width: 100%;
   height: 100%;
-  transition: all $fade-time ease-in;
+
+  overflow: visible;
+  // transition: all $fade-time ease-in;
   // fill: white;
   animation-name: rainbow-fill;
   animation-duration: $rainbowTime;
@@ -32,35 +32,161 @@ $fade-time: 2s;
   animation-iteration-count: infinite;
 }
 
-.symbios-svg path{
-  transition: $fade-time filter linear;
--webkit-transition: $fade-time -webkit-filter linear;
--moz-transition: $fade-time -moz-filter linear;
--ms-transition: $fade-time -ms-filter linear;
--o-transition: $fade-time -o-filter linear;
+$fade-time: 8s;
+$shad-amt: .18;
+$shad-disp-amt: .45;
+$xtra: 1.6;
+$numPieces: 27;
+$plop-delay: .2s;
+
+@mixin plop($mult) {
+  #{.5s/$fade-time * 100%} {
+    opacity: 1;
+  }
+  #{1.25s/$fade-time * 100%} {
+    opacity: 1;
+    transform: translate($mult*$h1*$shad-disp-amt*$xtra, $mult*$h1*$shad-disp-amt*$xtra);
+  }
+  #{2s/$fade-time * 100%} {
+    opacity: 1;
+    transform: translate($mult*$h1*$shad-disp-amt, $mult*$h1*$shad-disp-amt);
+  }
+
+  #{(1 - .75s/$fade-time) * 100%} {
+    opacity: 1;
+    transform: translate($mult*$h1*$shad-disp-amt*$xtra, $mult*$h1*$shad-disp-amt*$xtra);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  
 }
 
-// .hidden-neu {
-//   opacity: 0;
-// }
-
-
-// .shown-neu {
-//   opacity: 1;
-// }
-
-.hidden-neu path{
-  filter: 
-        drop-shadow( 0 0 0 hsl(0, $shadSat, $valDark) ) 
-        drop-shadow( 0 0 0 hsl(0, $lightSat, $valLight) );
+@keyframes shad-plop {
+  @include plop(1);
+}
+@keyframes refl-plop {
+  @include plop(-1);
 }
 
+.hidden-shad, .hidden-refl {
 
-.shown-neu path{
-  @include drop-shadow(.15);
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+}
+
+.hidden-shad {
+  animation-name: rainbow-fill-shad;
+}
+
+.hidden-refl {
+  animation-name: rainbow-fill-refl;
+}
+
+.hidden-shad path, .hidden-refl path{
+  opacity: 0;
+  filter: blur($blur1*$shad-amt);
+  transform: translate(0, 0);
+
+  animation-delay: .5s;
+
+  animation-duration: $fade-time;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.hidden-shad path{
+  animation-name: shad-plop;
+}
+
+.hidden-refl path{
+  animation-name: refl-plop;
+}
+
+.hidden-refl span{
+  display: inline-block;
+}
+
+@mixin iterate-delay{
+  @for $i from 1 through $numPieces {
+    &:nth-of-type(#{$i}){
+      animation-delay: $i*$plop-delay;
+    }
+  }
+}
+
+.hidden-shad path, .hidden-refl path{
+  @include iterate-delay;
+}
+
+.symbios-load-spin path {
+  &:nth-of-type(1){
+    animation-delay: 21 * $plop-delay;
+  }
+  &:nth-of-type(2){
+    animation-delay: 22 * $plop-delay;
+  }
+}
+
+@keyframes sym-spin{
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+$spin-size: 26%;
+$spin-time: 5s;
+.symbios-load-spin {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 73.5%;
+  height: $spin-size;
+  width: $spin-size;
+  overflow: visible;
+}
+
+.symbios-load-spin path {
+  animation: sym-spin $spin-time infinite linear;
+  // fill: black;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+// .symbios-load-spin .hidden-shad{
+//   animation-name: shad-plop, rainbow-fill-shad;
+//   // fill: black;
+// }
+
+// .symbios-load-spin .hidden-refl{
+//   animation-name: refl-plop, rainbow-fill-refl;
+//   // fill: black;
+// }
+
+.symbios-load-spin .symbios-svg {
+  animation-duration: $fade-time, $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+
+  // animation-name: rainbow-fill;
+  // animation-duration: $rainbowTime;
+  // animation-timing-function: ease-in-out;
+  // animation-iteration-count: infinite;
 }
 
 // .symbios-svg path{
-//   fill: black;
-//   opacity: 1;
+//   &:nth-of-type(21), &:nth-of-type(22){
+//     display: none;
+//   }
 // }

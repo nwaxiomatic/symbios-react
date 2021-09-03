@@ -100,8 +100,8 @@ class PostPreview extends Component {
     img: null
   }
 
-   animLength = 1
-   firstTime = 0
+  animLength = 1
+  firstTime = 0
 
   constructor(props) {
     super(props)

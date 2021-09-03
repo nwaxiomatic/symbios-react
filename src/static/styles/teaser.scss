@@ -4,13 +4,14 @@ $hover-time: .3s;
 $desc-pad: 13%;
 $teaser-rad: 50%;
 $hover-rad: 14%;
-$teaser-width: 100%;
+$teaser-width: 95%;
 $hover-width: 100%;
 $desc-size: 2 vmin;
 
 $img-ratio: .91;
 
 $transform-teaser: -($teaser-width - $hover-width)/2;
+$hover-scale: $hover-width / $teaser-width;
 
 body{
   background-color: hsl($hueMin, $sat, $val);
@@ -141,14 +142,14 @@ $spin-time: 2s;
   border-radius: $teaser-rad;
   border: 0px solid white;
   margin: auto;
-  transform: translateY($transform-teaser);
+  transform: translateY($transform-teaser) scale(1);
 }
 
 .teaser-square:hover, .teaser-square:active {
-  width: $hover-width;
-  padding-bottom: $hover-width;
+  // width: $hover-width;
+  // padding-bottom: $hover-width;
   border-radius: $hover-rad;
-  transform: translateY(0);
+  transform: translateY($transform-teaser) scale($hover-scale);
 }
 
 .teaser-square-shadow {
@@ -160,7 +161,7 @@ $spin-time: 2s;
   top: 0;
   left: 0;
 
-  transform: translate($transform-teaser, $transform-teaser);
+  transform: translate($transform-teaser, $transform-teaser) scale(1);
 
   border-radius: $teaser-rad;
   transition: all $hover-time;
@@ -174,9 +175,9 @@ $spin-time: 2s;
 
 .teaser-square:hover ~ .teaser-square-shadow, .teaser-square:active ~ .teaser-square-shadow  {
   border-radius: $hover-rad;
-  width: $hover-width;
-  height: $hover-width;
-  transform: translate(0, 0);
+  // width: $hover-width;
+  // height: $hover-width;
+  transform: translate($transform-teaser, $transform-teaser) scale($hover-scale);
 }
 
 .teaser-square-cover {
@@ -193,6 +194,7 @@ $spin-time: 2s;
 
 .teaser-square:hover .teaser-square-cover, .teaser-square:active .teaser-square-cover {
   opacity: .2;
+  transform: scale($hover-scale);
 }
 
 .teaser-img {
@@ -213,6 +215,7 @@ $spin-time: 2s;
 .teaser-square:hover .teaser-img, .teaser-square:active .teaser-img {
   border-radius: $hover-rad * $img-ratio;
   opacity: .16;
+  // transform: translate(-50%, -50%) scale($hover-scale);
 }
 
 .post-title {

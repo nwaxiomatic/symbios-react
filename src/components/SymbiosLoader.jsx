@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ReactComponent as SymbiosSVG } from 'static/svg/symbios.svg'
+import { ReactComponent as SymbiosSpin } from 'static/svg/symbios-spin.svg'
 import 'static/styles/symbios-loader.scss'
 
 
@@ -21,17 +22,18 @@ class SymbiosLoader extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({loaded:true})
-    }, 1000)
+    // setTimeout(() => {
+    //   this.setState({loaded:true})
+    // }, 500)
   }
 
-  animDelay = (animLength, offset = 0, getTimeAgain = false) => {
+  animDelay = (animLength, offsets = null, getTimeAgain = false) => {
     const { getTime } = this.props
     const theTime = getTimeAgain ? getTime() : this.firstTime;
     let animDelayStr = ''
-    let animSec = animLength.map((item) => {
+    let animSec = animLength.map((item, idx) => {
       // console.log(item)
+      let offset = offsets ? offsets[idx] ? offsets[idx] : 0 : 0
       return ((-theTime + offset)%item).toString() + 's'
     })
   // console.log(animSec.join(', '))
@@ -46,20 +48,36 @@ class SymbiosLoader extends Component {
     return(
       <div 
         className="cover"
-        style={animDelay([animLength])}
+        style={animDelay([animLength], 14)}
       >
+        
         <SymbiosSVG 
-          className={"luminosity symbios-svg svg-drop hidden-neu " + (loaded ? "shown-neu" : "")}
-          style={animDelay([animLength], 0)}
+          className="symbios-svg hidden-refl"
+          style={animDelay([animLength])}
         />
         <SymbiosSVG 
-          className={"saturation symbios-svg svg-drop hidden-neu " + (loaded ? "shown-neu" : "")}
-          style={animDelay([animLength], 0)}
+          className="symbios-svg hidden-shad"
+          style={animDelay([animLength])}
         />
-         <SymbiosSVG 
+        <SymbiosSVG 
           className="symbios-svg"
-          style={animDelay([animLength], 0)}
+          style={animDelay([animLength])}
         />
+
+       {/* <div className="symbios-load-spin">
+          <SymbiosSpin
+            className="symbios-svg hidden-refl"
+            style={animDelay([animLength])}
+          />
+           <SymbiosSpin
+            className="symbios-svg hidden-shad"
+            style={animDelay([animLength])}
+          />
+           <SymbiosSpin
+            className="symbios-svg"
+            style={animDelay([animLength])}
+          />
+        </div>*/}
       </div>
     )
   }

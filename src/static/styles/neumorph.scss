@@ -18,11 +18,11 @@ $hueMax: 200;
 
 $hueSteps: 6;
 
-.luminosity, .luminosity path {
+.luminosity {
   mix-blend-mode: luminosity;
   z-index: -5;
 }
-.saturation, .saturation path {
+.saturation {
   mix-blend-mode: saturation;
   z-index: -6;
 }
@@ -75,6 +75,26 @@ $hueSteps: 6;
       $hh: rampUpDown($i, $hueMin, $hueMax, $hueSteps);
       #{$prop}: 
         hsl($hh, $sat, $val);
+    }
+  }
+}
+
+@mixin rainbow-shad($prop) {
+  @for $i from 0 through $hueSteps {
+    #{$i / $hueSteps * 100%} {
+      $hh: rampUpDown($i, $hueMin, $hueMax, $hueSteps);
+      #{$prop}: 
+        hsl($hh, $shadSat, $valDark);
+    }
+  }
+}
+
+@mixin rainbow-refl($prop) {
+  @for $i from 0 through $hueSteps {
+    #{$i / $hueSteps * 100%} {
+      $hh: rampUpDown($i, $hueMin, $hueMax, $hueSteps);
+      #{$prop}: 
+        hsl($hh, $lightSat, $valLight);
     }
   }
 }
@@ -137,6 +157,12 @@ $hueSteps: 6;
 }
 @keyframes rainbow-fill {
   @include rainbow('fill');
+}
+@keyframes rainbow-fill-shad {
+  @include rainbow-shad('fill');
+}
+@keyframes rainbow-fill-refl {
+  @include rainbow-refl('fill');
 }
 @keyframes rainbow-svg {
   @include rainbow('fill');

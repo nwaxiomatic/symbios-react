@@ -206,7 +206,7 @@ class Portfolio extends Component {
         <SymbiosLoader
           getTime={getTime}
         />
-        {/*<div  className="portfolio">
+        <div  className="portfolio">
         {posts.length > 0 &&
           <InfiniteScrollFix
             dataLength={numPosts}
@@ -233,7 +233,7 @@ class Portfolio extends Component {
             </Row>
 
           </InfiniteScrollFix>}
-          </div>*/}
+          </div>
       </Container>
       
     )
