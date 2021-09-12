@@ -1,0 +1,33 @@
+@import "static/styles/neumorph";
+
+.header, .header button {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	animation-name: rainbow-text;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  font-weight: 900;
+}
+.header button {
+	// z-index: 99999;
+}
+
+.symbios-svg-header {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: 10vh;
+
+  transform-origin: 10vh 0px;
+
+  transform: rotate(-90deg) translate(0, -10vh);
+
+  animation-name: rainbow-svg-symbios-sm;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}

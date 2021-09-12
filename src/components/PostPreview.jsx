@@ -33,13 +33,13 @@ class SquareImg extends Component {
               <span className="center spin-loader spinny-shadow">
                  <FaBiohazard
                   className="spinny spinny-shadow-svg"
-                  style={animDelay([spinnerTime])}
+                  style={animDelay([animLength, spinnerTime])}
                 /> 
               </span>
               <span className="center spin-loader spinny-refl">
                 <FaBiohazard
                   className="spinny spinny-refl-svg"
-                  style={animDelay([spinnerTime])}
+                  style={animDelay([animLength, spinnerTime])}
                 /> 
               </span>
 
@@ -78,15 +78,15 @@ class SquareImg extends Component {
             </span>
 
           </div>
-
+{/*
            <div 
               className='teaser-square-shadow saturation' 
               style={animDelay([animLength])}
-            />
-             <div 
+            />*/}
+             {/*<div 
               className='teaser-square-shadow luminosity' 
               style={animDelay([animLength])}
-            />
+            />*/}
 
           
           </span>
@@ -97,7 +97,8 @@ class SquareImg extends Component {
 class PostPreview extends Component {
 
   state = {
-    img: null
+    img: null,
+    shown: false
   }
 
   animLength = 1
@@ -108,9 +109,7 @@ class PostPreview extends Component {
 
     this.iRef = React.createRef()
     this.imgRef = React.createRef()
-    this.animLength = parseFloat(
-      getComputedStyle(document.body).animationDuration
-    )
+    this.animDelay = this.props.animDelay.bind(this)
     this.firstTime = this.props.getTime()
     // console.log(this.animLength)
   }
@@ -118,6 +117,10 @@ class PostPreview extends Component {
   componentDidMount() {
     const { content, data, img, SC, Vimeo } = this.props
     const { title, image, video, audio, sound, bandcamp } = data
+
+    setTimeout(()=>{
+      this.setState({shown:true})
+    }, 1)
 
     if(!img && image){
       getFlickrImg(image, "Medium", (img) => this.imgLoaded(img))
@@ -159,25 +162,11 @@ class PostPreview extends Component {
      return this.imgRef.current != null;
   }
 
-  animDelay = (animLength, getTimeAgain = false) => {
-    const { getTime } = this.props
-    const theTime = getTimeAgain ? getTime() : this.firstTime;
-    let animDelayStr = ''
-    let animSec = animLength.map((item) => {
-      // console.log(item)
-      return ((-theTime)%item).toString() + 's'
-    })
-  // console.log(animSec.join(', '))
-    return { 
-      animationDelay: animSec.join(', ')
-    }
-  }
-
   render(){
-    const { img } = this.state
-    const { content, data, getTime } = this.props
+    const { img, shown } = this.state
+    const { content, data, getTime, animLength } = this.props
     const { title, image, video, sound, bandcamp } = data
-    const { animDelay, animLength } = this
+    const { animDelay } = this
 
     return (
       <Col 
@@ -186,19 +175,18 @@ class PostPreview extends Component {
         lg={4}
         xl={3}
         className="post-teaser"
+        style={animDelay([animLength])}
         ref={this.imgRef} 
       >
         <div 
-          className="teaser-square-container"
-          
+          className={"teaser-square-container hidden-teaser " + (shown ? 'shown-teaser' : '')}
         >
-            <SquareImg 
-              data={data}
-              img={img}
-              animDelay={animDelay}
-              animLength={animLength}
-            />
-           
+          <SquareImg 
+            data={data}
+            img={img}
+            animDelay={animDelay}
+            animLength={animLength}
+          />
         </div>
         <div className="post-title">
           {title}

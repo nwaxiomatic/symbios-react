@@ -1,6 +1,6 @@
 @import "static/styles/neumorph";
 
-$hover-time: .3s;
+$hover-time: .2s;
 $desc-pad: 13%;
 $teaser-rad: 50%;
 $hover-rad: 14%;
@@ -12,19 +12,6 @@ $img-ratio: .91;
 
 $transform-teaser: -($teaser-width - $hover-width)/2;
 $hover-scale: $hover-width / $teaser-width;
-
-body{
-  background-color: hsl($hueMin, $sat, $val);
-  animation-duration: $rainbowTime;
-}
-// .bg-rainbow  {
-//   animation-name: rainbow;
-//   animation-duration: $rainbowTime;
-//   animation-timing-function: ease-in-out;
-//   animation-iteration-count: infinite;
-
-//   z-index: -999;
-// }
 
 $spin-off: 4%;
 $spin-blur: .18;
@@ -58,35 +45,44 @@ $spin-time: 2s;
 
 .spinny-shadow-svg{
   transform: translate($spin-off, $spin-off) rotate(0deg) ;
-  animation: $spin-time linear infinite spinny-shadow;
+  // animation: $spin-time linear infinite spinny-shadow;
   fill: hsl(0,$shadSat,$valDark);
   // filter: drop-shadow(0 0 $blur1*$spin-blur hsl(0,$shadSat,$valDark));
+   animation-name: rainbow-fill-shad, spinny-shadow;
+  animation-duration: $rainbowTime, $spin-time;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
 }
 
 .spinny-shadow, .spinny-refl {
-  mix-blend-mode: luminosity;
+  // mix-blend-mode: luminosity;
   filter: blur($blur1*$spin-blur);
 }
 
 .spinny-refl-svg{
   transform: translate(-$spin-off, -$spin-off) rotate(0deg) ;
-  animation: $spin-time linear infinite spinny-refl;
+  // animation: $spin-time linear infinite spinny-refl;
   fill: hsl(0,$lightSat,$valLight+.5*$valDelta);
+   animation-name: rainbow-fill-refl, spinny-refl;
+  animation-duration: $rainbowTime, $spin-time;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
   
 }
 
 .hidden-spin svg {
-  fill: rgba(0,0,0,0);
+  opacity: 0;
+  // fill: rgba(0,0,0,0);
   transition: all 1s;
   visibility: hidden;
 }
 
 .bg-grad {
-  // background-image: linear-gradient(
-  //   135deg, 
-  //   hsl(0, 0, $val + $valDelta) 0%, 
-  //   hsl(0, 0, $val - $valDelta) 100%
-  // );
+  background-image: linear-gradient(
+    135deg, 
+    hsl(0, 0, $val + .5*$valDelta) 0%, 
+    hsl(0, 0, $val - .5*$valDelta) 100%
+  );
   position: fixed;
   top: 0;
   left: 0;
@@ -104,7 +100,10 @@ $spin-time: 2s;
 }
 
 .row {
-  padding: 60px;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  padding-left: 10vh;
+  padding-right: 10vh;
   overflow-x: hidden;
 }
 
@@ -152,24 +151,28 @@ $spin-time: 2s;
   transform: translateY($transform-teaser) scale($hover-scale);
 }
 
-.teaser-square-shadow {
-  content: '';
-  display: block;
-  width: $teaser-width;
-  height: $teaser-width;
-  position: absolute;
-  top: 0;
-  left: 0;
+.teaser-square {
+  // content: '';
+  // display: block;
+  // width: $teaser-width;
+  // height: $teaser-width;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
 
-  transform: translate($transform-teaser, $transform-teaser) scale(1);
+  // transform: translate($transform-teaser, $transform-teaser) scale(1);
 
-  border-radius: $teaser-rad;
-  transition: all $hover-time;
+  // border-radius: $teaser-rad;
+  // transition: all $hover-time;
 
-  box-shadow: 
-        
-        -1*$h1 -1*$h1 $blur1 hsl(180,$lightSat,$valLight),
-        $h1 $h1 $blur1 hsl(180,$shadSat,$valDark);
+  // box-shadow:
+  //       -1*$h1 -1*$h1 $blur1 hsl(180,$lightSat,$valLight),
+  //       $h1 $h1 $blur1 hsl(180,$shadSat,$valDark);
+
+  animation-name: rainbow-shadow;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 
@@ -210,6 +213,15 @@ $spin-time: 2s;
   opacity: 1;
 
   mix-blend-mode: normal;
+
+  animation-name: rainbow-shadow-md;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  // border: #999;
+  // border-width: 2px;
+  // border-style: solid;
+  // border-opacity: 20%;
 }
 
 .teaser-square:hover .teaser-img, .teaser-square:active .teaser-img {
@@ -225,6 +237,13 @@ $spin-time: 2s;
   margin-bottom: 2.5em;
   text-align: center;
   font-weight: bold;
+
+  animation-name: rainbow-text;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  // text-shadow : 2px 2px 4px hsl(50, 0, 60), -2px -2px 4px hsl(50, 0, 100);
+  // font-weight: 900;
 }
 
 // .post-teaser:hover .post-title {
@@ -250,7 +269,8 @@ $spin-time: 2s;
 
   background: rgba(0, 0, 0, 0);
 
-  color: black;
+  color: $font-color;
+  text-shadow: 0 0 .5em $font-color;
   opacity: 0;
   padding: $desc-pad  + ($teaser-width - $hover-width)/2;
   font-size: $desc-size;
@@ -267,8 +287,9 @@ $spin-time: 2s;
   transition: all $hover-time;
   // overflow: scroll;
   opacity: 1;
-  padding: $desc-pad;
+  // padding: $desc-pad;
   padding-top: $desc-pad*.8 ;
+  // transform: scale($hover-scale);
 }
 
 .client {
@@ -293,3 +314,16 @@ $spin-time: 2s;
   min-width: 100%;
   min-height: 100%;
 }
+
+.hidden-teaser {
+  opacity: 0;
+  transition: all 1s;
+  visibility: hidden;
+}
+
+.shown-teaser {
+  opacity: 1;
+  visibility: visible;
+}
+
+

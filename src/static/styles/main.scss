@@ -1,5 +1,28 @@
-
+@import "static/styles/neumorph";
 @import "~bootstrap/scss/bootstrap";
+
+:root {
+  --scale-filter: translate(40vh, -15vh) scale(1);
+  --scale-filter-height: 100vh;
+}
+
+#turbFilter {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+body.stop-transitions * {
+  transition: none !important;
+}
+
+.disable-hover {
+  pointer-events: none !important;
+}
+
+.container{
+  max-width: none;
+}
 
 svg {
   fill: none;
@@ -12,21 +35,38 @@ a {
 body {
   margin: 0;
   padding: 0;
-/*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
-  // background: #b8c1c1;
   background-attachment: fixed;
   background-size: cover;
-  // font-family: "Courier New", Courier, monospace;
   font-family: 'Space Mono', monospace;
   cursor: cell;
-  // height: 100vh;
-  // color: white;
   overscroll-behavior-y: none;
 }
 
-// #root, .container {
-//   height: 100%;
-// }
+::-webkit-scrollbar {
+  width: 28px;
+  margin:0;
+}
+
+::-webkit-scrollbar-thumb {
+  z-index: 1/1;
+  background: hsl(0, $sat, $val);
+
+  box-shadow: 
+    inset 3px 3px 6px hsl(0, 0, $valDark),
+    inset -3px -3px 6px hsl(0, 0, $valLight);
+
+  mix-blend-mode: saturation;
+
+  // box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+
+  // border: 4px solid transparent;
+  border-radius: 15px;
+} 
+
+body{
+  background-color: hsl($hueMin, $sat, $val);
+  animation-duration: $rainbowTime;
+}
 
 button, input[type="submit"], input[type="reset"] {
   background: none;
@@ -37,11 +77,6 @@ button, input[type="submit"], input[type="reset"] {
   cursor: pointer;
   outline: inherit;
 }
-
-// .tagSelected {
-//   background: black;
-//   color: white;
-// }
 
 .center {
   position: absolute;
@@ -54,27 +89,82 @@ button, input[type="submit"], input[type="reset"] {
 
 .hidden {
   opacity: 0;
-  transition: all 1s;
+  transition: opacity 1s;
 }
 
 
 .shown {
   opacity: 1;
-  transition: all 1s;
+  transition: opacity 1s;
 }
 
-// .portfolio {
-//   position: static;
-//   top: 0;
-//   left: 0;
-//   height: 100vh !important; 
-//   width: 100vw !important;
-//   overflow: scroll !important;
+.portfolio-cont {
+  // direction:rtl; 
+  position: fixed;
+  width: 100vw;
+  left: 0vw;
+  transition: all $swipe-time;
+  transform: translate(0, 0) scale(1);
+  transform-origin: 0vw 50vh;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.port-shad-cont{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5vh;
+  height: 100vh;
+  filter: url(#filter) ;
+}
+
+.port-shad {
+  position: absolute;
+  // background: grey;
+  top: 0;
+  left: 3vh;
+  width: 200vw;
+  height: 150vh;
+  transform: translate(0, -25vh);
+    animation-name: rainbow-shadow-md;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.portfolio {
+  min-height: 101vh;
+  // filter: url(#filter);
+}
+
+.portfolio-cont div {
+  direction:ltr; 
+}
+
+.ox-cont {
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+// @include media-breakpoint-up(md) {
+  .portfolio-cont-slide {
+    // transform: translate(40vh, -15vh) scale(.7);
+    transform: var(--scale-filter);
+    height: var(--scale-filter-height);
+    // width: calc(100vw / .7 - 40vh / .7);
+  }
 // }
 
-// .infinite-scroll-component {
-//   min-height: 200vh;
+// @include media-breakpoint-down(md) {
+//   .portfolio-cont-slide {
+//     transform: translate(60vw, -30vh) scale(.4);
+//     height: (100/.4) * 1vh;
+//   }
 // }
+
 
 .TagSelector{
   background: rgba(0, 0, 0, 0);

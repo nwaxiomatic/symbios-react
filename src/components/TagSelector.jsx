@@ -5,14 +5,33 @@ import 'static/styles/tag-select.scss'
 
 class TagSelector extends Component {
 
-  componentDidMount() {
-    const { getTime } = this.props
-    const animLength = parseFloat(
-      getComputedStyle(document.body).animationDuration
-    )
-    this.animDelay = { 
-      animationDelay: ((-getTime())%animLength).toString() + 's'
-    }
+  prevTagList = null
+
+  tagStyles = {}
+
+  constructor(props){
+    super(props)
+    const { 
+      tags, animDelay, tagType, getTime, tagList, animLength
+    } = this.props
+    
+    this.animDelay = animDelay.bind(this)
+    this.firstTime = getTime()
+    this.prevTagList = tags[tagType]
+
+    Object.keys(this.prevTagList).map((tag, idx) => {
+      this.tagStyles[tag] = this.animDelay([animLength])
+    })
+  }
+
+  // componentDidMount() {
+  //   const { getTime } = this.props
+    
+  // }
+
+  componentDidUpdate() {
+    const { tags, tagType } = this.props
+    this.prevTagList = this.props.tags[tagType]
   }
 
   sinCos = (idx, numItems) => {
@@ -24,7 +43,7 @@ class TagSelector extends Component {
 
   render(){
     const { tags, tagSelect, tagType, getTime } = this.props
-    const { animDelay } = this
+    const { animDelay, prevTagList } = this
     const tagList = tags[tagType]
     const numItems = Object.keys(tagList).length
 
@@ -41,36 +60,43 @@ class TagSelector extends Component {
       >
         <div 
           className='tagSelectInner'
-          style={animDelay}
+          style={animDelay([animLength])}
         />
         <div 
           className='tagSelectInnerTitle'
-          style={animDelay}
+          style={animDelay([animLength])}
         >
           <div
             className='tagSelectInnerTitleText'
-            style={animDelay}
+            style={animDelay([animLength])}
           >
-            <FaBeer />
+            {/*<FaBeer />*/}
           </div>
         </div>
         <div 
           className='tagSelectCircle cBottom'
-          style={animDelay}
+          style={animDelay([animLength])}
         />
         <div 
           className='tagSelectCircle cTop'
-          style={animDelay}
+          style={animDelay([animLength])}
         />
         <div 
           className='tagSelectOuter'
-          style={animDelay}
+          style={animDelay([animLength])}
         />
         <div className='tagKnob'>
             {Object.keys(tagList).map((tag, idx) => {
               const sinCos = this.sinCos(idx, numItems)
               const transX = sinCos[0] < 0 ? 100 : 
                 Math.abs(sinCos[0]) < .02 ? 50 : 0
+              const setBack = prevTagList[tag] && !tagList[tag]
+              if(setBack){
+                this.tagStyles[tag] = animDelay([animLength], setBack)
+              }
+              // console.log(tag)
+              // console.log(prevTagList[tag])
+              // console.log(tagList[tag])
               // console.log(transX)
               // console.log(Math.round(sinCos[0] * 50))
               return (
@@ -84,13 +110,13 @@ class TagSelector extends Component {
                     transform: 'translate(-' + 
                       transX.toString() + 
                     '%, ' + Math.round((sinCos[1] - 1) * 50).toString() + '%)',
-                    ...animDelay
+                    ...animDelay([animLength])
                   }}
                 >
                   <button 
                     onClick={() => tagSelect(tag, tagType)}
-                    className={tagList[tag] ? 'tagSelected' : ''}
-                    style={animDelay}
+                    className={"tagItemButton" + (tagList[tag] ? ' tagSelected' : '')}
+                    style={this.tagStyles[tag]}
                   >
                     {tag}
                   </button>

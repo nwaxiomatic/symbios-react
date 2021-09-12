@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { ReactComponent as SymbiosSVG } from 'static/svg/symbios.svg'
 import { ReactComponent as SymbiosSpin } from 'static/svg/symbios-spin.svg'
-import 'static/styles/symbios-loader.scss'
+import 'static/styles/header.scss'
 
 
-class SymbiosLoader extends Component {
+class Header extends Component {
 
   state = {
     loaded: false
@@ -16,7 +16,7 @@ class SymbiosLoader extends Component {
   constructor(props){
     super(props)
     this.firstTime = this.props.getTime()
-    this.animDelay = this.props.animDelay.bind(this)
+     this.animDelay = this.props.animDelay.bind(this)
   }
 
   componentDidMount() {
@@ -27,23 +27,18 @@ class SymbiosLoader extends Component {
 
   render(){
     const { animDelay } = this
-    const { loaded, animLength } = this.state
+    const {menuClick, animLength } = this.props
+    const { loaded } = this.state
     return(
       <div 
-        className="cover"
+        className="header"
         style={animDelay([animLength], 14)}
       >
-        
-        <SymbiosSVG 
-          className="symbios-svg hidden-refl"
-          style={animDelay([animLength])}
-        />
-        <SymbiosSVG 
-          className="symbios-svg hidden-shad"
-          style={animDelay([animLength])}
-        />
-        <SymbiosSVG 
-          className="symbios-svg"
+
+      <button onClick={menuClick}> FILTER </button>
+
+       <SymbiosSVG 
+          className="symbios-svg-header"
           style={animDelay([animLength])}
         />
       </div>
@@ -51,4 +46,4 @@ class SymbiosLoader extends Component {
   }
 
 }
-export default SymbiosLoader 
+export default Header 

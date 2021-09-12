@@ -3,6 +3,7 @@ layout: media
 title: "Jade Pillar"
 tags:
   categories: 3d
+  tools: Houdini, LaTeX
 ads: false
 share: false
 show_url: false

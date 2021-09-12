@@ -32,27 +32,29 @@
   animation-iteration-count: infinite;
 }
 
-$fade-time: 8s;
+$fade-time: 5s;
+$o-time: .5s;
+$t-time: .5s;
 $shad-amt: .18;
-$shad-disp-amt: .45;
+$shad-disp-amt: .25;
 $xtra: 1.6;
 $numPieces: 27;
-$plop-delay: .2s;
+$plop-delay: .1s;
 
 @mixin plop($mult) {
-  #{.5s/$fade-time * 100%} {
+  #{$o-time/$fade-time * 100%} {
     opacity: 1;
   }
-  #{1.25s/$fade-time * 100%} {
+  #{($o-time+$t-time)/$fade-time * 100%} {
     opacity: 1;
     transform: translate($mult*$h1*$shad-disp-amt*$xtra, $mult*$h1*$shad-disp-amt*$xtra);
   }
-  #{2s/$fade-time * 100%} {
+  #{($o-time+2*$o-time)/$fade-time * 100%} {
     opacity: 1;
     transform: translate($mult*$h1*$shad-disp-amt, $mult*$h1*$shad-disp-amt);
   }
 
-  #{(1 - .75s/$fade-time) * 100%} {
+  #{(1 - ($t-time)/$fade-time) * 100%} {
     opacity: 1;
     transform: translate($mult*$h1*$shad-disp-amt*$xtra, $mult*$h1*$shad-disp-amt*$xtra);
   }

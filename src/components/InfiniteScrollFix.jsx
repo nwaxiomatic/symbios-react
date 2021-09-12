@@ -4,19 +4,25 @@ import InfiniteScroll from "react-infinite-scroll-component"
 function intentionalScrollTop (event) {
   return document.body.scrollTop === 0 && event.deltaY < 0;
 }
+
+// function isScrollable(el) {
+//   return el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight;
+// }
+
   
-function intentionalScrollBottom (deltaY) {
-  // console.log('window.innerHeight')
-  // console.log(window.innerHeight)
-  // console.log('window.scrollY')
-  // console.log(window.scrollY)
-  // console.log('document.body.offsetHeight')
-  // console.log(document.body.offsetHeight)
+function intentionalScrollBottom (elem, deltaY) {
+  // console.log(elem)
+  // console.log('elem.scrollHeight')
+  // console.log(elem.scrollHeight)
+  // console.log('elem.scrollTop')
+  // console.log(elem.scrollTop)
+  // console.log('elem.offsetHeight')
+  // console.log(elem.offsetHeight)
   // console.log('event.deltaY')
   // console.log(event.deltaY)
   // console.log('(window.innerHeight + window.scrollY) >= document.body.offsetHeight')
   // console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
-  return (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY > 0;
+  return (elem.scrollHeight - elem.scrollTop) <= elem.offsetHeight + 1 && deltaY > 0;
 }
 
 class InfiniteScrollFix extends InfiniteScroll {
@@ -87,9 +93,11 @@ class InfiniteScrollFix extends InfiniteScroll {
     //     .throttledOnScrollListener);
     // }
 
+    let pScroll = this._infScroll.parentElement.parentElement.parentElement
+
     if (this.el) {
       this.el.addEventListener('wheel', (e) => {
-        if(intentionalScrollBottom(e.deltaY)) {
+        if(intentionalScrollBottom(pScroll, e.deltaY)) {
          this.throttledOnScrollListener(e)
         }
       })
@@ -102,7 +110,7 @@ class InfiniteScrollFix extends InfiniteScroll {
         let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent
         let touch = evt.touches[0] || evt.changedTouches[0]
         let touchEndY = touch.clientY
-        if(intentionalScrollBottom(this.touchStartY - touchEndY)) {
+        if(intentionalScrollBottom(pScroll, this.touchStartY - touchEndY)) {
          this.throttledOnScrollListener(e)
         }
       })

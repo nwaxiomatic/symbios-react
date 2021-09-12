@@ -1,29 +1,35 @@
-$h1: 6px;
-$blur1: 18px;
+$h1: 12px;
+$blur1: 22px;
 $colLight: hsl(50, 0, 100);
 $colDark: #9ca4a4;
 
-$sat: 80;
-$shadSat: 50;
-$lightSat: 90;
-$val: 88;
-$valDelta: 6;
+$light-color: hsl(10, 100, 90);
+$font-color: hsl(30, 90, 50);
+
+$sat: 0;
+$shadSat: 10;
+$lightSat: 60;
+$val: 85;
+$valDelta: 10;
 $valDark: $val - 3*$valDelta;
-$valLight: $val + 1.5*$valDelta;
+// $valLight: $val + 1.2*$valDelta;
+$valLight: 100;
 
 $rainbowTime: 30s;
 
-$hueMin: 100;
-$hueMax: 200;
+$hueMin: 90;
+$hueMax: 260;
 
 $hueSteps: 6;
 
+$swipe-time: .5s;
+
 .luminosity {
-  mix-blend-mode: luminosity;
+  // mix-blend-mode: luminosity;
   z-index: -5;
 }
 .saturation {
-  mix-blend-mode: saturation;
+  // mix-blend-mode: saturation;
   z-index: -6;
 }
 
@@ -110,6 +116,36 @@ $hueSteps: 6;
   }
 }
 
+@mixin rainbow-shadow-glow($amt, $gcol, $prop: 'box-shadow') {
+  @for $i from 0 through $hueSteps {
+    #{$i / $hueSteps * 100%} {
+      $hh: rampUpDown($i, $hueMin, $hueMax, $hueSteps);
+      #{$prop}: 
+        $h1*$amt $h1*$amt $blur1*abs($amt) hsl($hh, $shadSat, $valDark), 
+        -1*$h1*$amt -1*$h1*$amt $blur1*abs($amt) hsl($hh, $lightSat, $valLight),
+        0 0 $blur1*abs($amt) $gcol,
+        0 0 $blur1*abs($amt)*2 $gcol,
+        0 0 $blur1*abs($amt)*4 $gcol;
+    }
+  }
+}
+
+@mixin rainbow-shadow-glow-inset($amt, $gcol, $prop: 'box-shadow') {
+  @for $i from 0 through $hueSteps {
+    #{$i / $hueSteps * 100%} {
+      $hh: rampUpDown($i, $hueMin, $hueMax, $hueSteps);
+      #{$prop}: 
+        0 0 $blur1*abs($amt) $gcol,
+        0 0 $blur1*abs($amt)*2 $gcol,
+        0 0 $blur1*abs($amt)*4 $gcol,
+        inset $h1*$amt $h1*$amt $blur1*abs($amt) hsl($hh, $shadSat, $valDark), 
+        inset -1*$h1*$amt -1*$h1*$amt $blur1*abs($amt) hsl($hh, $lightSat, $valLight);
+        
+    }
+  }
+}
+
+
 @mixin drop-shadow($amt) {
   filter: 
     drop-shadow( $h1*$amt*3 $h1*$amt*3 $blur1*abs($amt) hsl(0, $shadSat, $valDark) ) 
@@ -172,12 +208,28 @@ $hueSteps: 6;
   @include rainbow('fill');
   @include rainbow-drop-shadow(.2);
 }
+@keyframes rainbow-svg-symbios-sm {
+  @include rainbow('fill');
+  @include rainbow-drop-shadow(.06);
+}
 @keyframes rainbow-text {
   @include rainbow('color');
   @include rainbow-shadow(.1, 'text-shadow');
 }
+@keyframes rainbow-text-dark {
+  @include rainbow-shad('color');
+  @include rainbow-shadow(.1, 'text-shadow');
+}
+@keyframes rainbow-text-glow {
+  // @include rainbow('color');
+  @include rainbow-shadow-glow(.1, #fcc, 'text-shadow');
+}
+@keyframes rainbow-text-glow-inset {
+  // @include rainbow('color');
+  @include rainbow-shadow-glow(-.06, #fcc, 'text-shadow');
+}
 @keyframes rainbow-text-invert {
-  @include rainbow('color');
+  // @include rainbow('color');
   @include rainbow-shadow(-.06, 'text-shadow');
 }
 @keyframes rainbow-inset-shadow-sm {
