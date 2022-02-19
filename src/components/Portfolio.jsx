@@ -348,7 +348,7 @@ class Portfolio extends Component {
         <div className={"tagKnobs " + (menu && "tagKnobs-slide")}>
           <div className="port-shad-cont"><div className="port-shad"/></div>
           <div className="tag-selector-knobs">
-            {Object.keys(tags).map( tagType =>
+            {/*Object.keys(tags).map( tagType =>
               <TagSelector
                 key={tagType}
                 tags={tags}
@@ -358,7 +358,7 @@ class Portfolio extends Component {
                 animDelay={animDelay}
                 animLength={animLength}
               />
-            )}
+            )*/}
           </div>
         </div>
         <div 

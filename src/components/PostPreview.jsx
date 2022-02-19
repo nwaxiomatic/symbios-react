@@ -28,69 +28,67 @@ class SquareImg extends Component {
     // if(img)
       return (
         <span>
-
-         <span className={"spinners-all " + (img ? 'hidden-spin' :'')}>
-              <span className="center spin-loader spinny-shadow">
-                 <FaBiohazard
-                  className="spinny spinny-shadow-svg"
-                  style={animDelay([animLength, spinnerTime])}
-                /> 
-              </span>
-              <span className="center spin-loader spinny-refl">
-                <FaBiohazard
-                  className="spinny spinny-refl-svg"
-                  style={animDelay([animLength, spinnerTime])}
-                /> 
-              </span>
-
-              <span className="center spin-loader">
-                <FaBiohazard
-                  className="spinny spinny-top-svg"
-                  style={animDelay([animLength, spinnerTime])}
-                />
-              </span>
-          </span>
-          
-
-        <div 
-            className="teaser-square"
+           <div 
+            className='teaser-square-shadow saturation' 
             style={animDelay([animLength])}
-          >
-          
+          />
+          <div 
+            className='teaser-square-shadow luminosity' 
+            style={animDelay([animLength])}
+          />
 
-          <span className={"hidden " + (img ? 'shown' :'')}>
-            <div className='teaser-square-cover' />
-            { img ? 
-            <div
-              className='teaser-img'
-              style={{ 
-                backgroundImage: 'url(\"' + img.src + '\")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center', 
-                backgroundRepeat: 'no-repeat'
-              }}
-            /> : ''}
-            <div 
-              className="description"
-            >
-              {data.blurb}
-            </div>
+
+          <span className={"spinners-all " + (img ? 'hidden-spin' :'')}>
+            <span className="center spin-loader spinny-shadow">
+               <FaBiohazard
+                className="spinny spinny-shadow-svg"
+                style={animDelay([animLength, spinnerTime])}
+              /> 
+            </span>
+            <span className="center spin-loader spinny-refl">
+              <FaBiohazard
+                className="spinny spinny-refl-svg"
+                style={animDelay([animLength, spinnerTime])}
+              /> 
             </span>
 
-          </div>
-{/*
+            <span className="center spin-loader">
+              <FaBiohazard
+                className="spinny spinny-top-svg"
+                style={animDelay([animLength, spinnerTime])}
+              />
+            </span>
+          </span>
+
            <div 
-              className='teaser-square-shadow saturation' 
-              style={animDelay([animLength])}
-            />*/}
-             {/*<div 
-              className='teaser-square-shadow luminosity' 
-              style={animDelay([animLength])}
-            />*/}
+            className={"teaser-square" + (img ? '' : ' disable-hover')}
+            style={animDelay([animLength])}
+          >
+            <span className={"hidden " + (img ? 'shown' :'')}>
+               <div 
+                className="description"
+              >
+                {data.blurb}
+              </div>
+              <div className='teaser-square-cover' />
+              { img ? 
+                <div
+                  className='teaser-img'
+                  style={{ 
+                    backgroundImage: 'url(\"' + img.src + '\")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center', 
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                /> : ''
+              }
+            </span>
+          </div>
 
           
-          </span>
-        )
+         
+      </span>
+    )
   }
 }
 

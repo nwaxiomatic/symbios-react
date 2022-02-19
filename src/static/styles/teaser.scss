@@ -40,7 +40,7 @@ $spin-time: 2s;
 }
 
 .spinners-all {
-  z-index: 1000;
+  //z-index: 1000;
 }
 
 .spinny-shadow-svg{
@@ -71,7 +71,7 @@ $spin-time: 2s;
 }
 
 .hidden-spin svg {
-  opacity: 0;
+  opacity: .01;
   // fill: rgba(0,0,0,0);
   transition: all 1s;
   visibility: hidden;
@@ -91,7 +91,7 @@ $spin-time: 2s;
   overflow: hidden;
   z-index: -998;
 
-  background-blend-mode: luminosity; 
+  //background-blend-mode: luminosity; 
 
   animation-name: rainbow;
   animation-duration: $rainbowTime;
@@ -116,6 +116,7 @@ $spin-time: 2s;
 }
 
 .teaser-square-container {
+  position:absolute;
   width: 100%;
   height: 0;
   padding: 0;
@@ -133,11 +134,18 @@ $spin-time: 2s;
 }
 
 .teaser-square {
+  position: absolute;
   width: $teaser-width;
   height: 0;
   padding-bottom: $teaser-width;
   overflow: hidden;
+
   transition: all $hover-time;
+  -webkit-transition: all $hover-time;
+  -moz-transition:  all $hover-time;
+  -ms-transition:  all $hover-time;
+  -o-transition:  all $hover-time;
+
   border-radius: $teaser-rad;
   border: 0px solid white;
   margin: auto;
@@ -176,7 +184,7 @@ $spin-time: 2s;
 }
 
 
-.teaser-square:hover ~ .teaser-square-shadow, .teaser-square:active ~ .teaser-square-shadow  {
+.teaser-square:hover ~ .teaser-square-shadow, .teaser-square:focus ~ .teaser-square-shadow  , .teaser-square:active ~ .teaser-square-shadow  {
   border-radius: $hover-rad;
   // width: $hover-width;
   // height: $hover-width;
@@ -185,22 +193,29 @@ $spin-time: 2s;
 
 .teaser-square-cover {
   background: white;
-  opacity: 0;
-  transition: $hover-time;
+  opacity: 0.01;
+
+  transition: all $hover-time;
+  -webkit-transition: all $hover-time;
+  -moz-transition:  all $hover-time;
+  -ms-transition:  all $hover-time;
+  -o-transition:  all $hover-time;
+
   width: 100%;
   height: 100%;
   // z-index: -1;
-  position: absolute;
+  // position: absolute;
 
   mix-blend-mode: normal;
 }
 
-.teaser-square:hover .teaser-square-cover, .teaser-square:active .teaser-square-cover {
+.teaser-square:hover .teaser-square-cover, .teaser-square:focus .teaser-square-cover , .teaser-square:active .teaser-square-cover {
   opacity: .2;
   transform: scale($hover-scale);
 }
 
 .teaser-img {
+  position: absolute;
   width: 100% * $img-ratio;
   height: 100% * $img-ratio;
   position: absolute;
@@ -209,8 +224,13 @@ $spin-time: 2s;
   transform: translate(-50%, -50%);
   border-radius: $teaser-rad;// * $img-ratio;
   // z-index: -10;
-  transition: $hover-time;
-  opacity: 1;
+  transition: all $hover-time;
+  -webkit-transition: all $hover-time;
+  -moz-transition:  all $hover-time;
+  -ms-transition:  all $hover-time;
+  -o-transition:  all $hover-time;
+
+  opacity: .99;
 
   mix-blend-mode: normal;
 
@@ -224,7 +244,7 @@ $spin-time: 2s;
   // border-opacity: 20%;
 }
 
-.teaser-square:hover .teaser-img, .teaser-square:active .teaser-img {
+.teaser-square:hover .teaser-img, .teaser-square:focus .teaser-img, .teaser-square:active .teaser-img {
   border-radius: $hover-rad * $img-ratio;
   opacity: .16;
   // transform: translate(-50%, -50%) scale($hover-scale);
@@ -251,10 +271,16 @@ $spin-time: 2s;
 // }
 
 .teaser-square .description {
-  // z-index: 10;
-  height: 100vh;
+  position: absolute;
+  // z-index: 99999;
+  height: 100%;
   width: 100%;
   transition: all $hover-time/2;
+  -webkit-transition: all $hover-time/2;
+  -moz-transition:  all $hover-time/2;
+  -ms-transition:  all $hover-time/2;
+  -o-transition:  all $hover-time/2;
+
   overflow: hidden;
 
   overflow-wrap: break-word;
@@ -271,25 +297,31 @@ $spin-time: 2s;
 
   color: $font-color;
   text-shadow: 0 0 .5em $font-color;
-  opacity: 0;
+  opacity: 0.01;
   padding: $desc-pad  + ($teaser-width - $hover-width)/2;
   font-size: $desc-size;
-  padding-top: 50%;
+  padding-top: $desc-pad*.8 ;
 
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
+  transform: translateY(30%);
 }
 .teaser-square .description::-webkit-scrollbar { /* WebKit */
   width: 0px;
 }
 
-.teaser-square:hover .description {
+.teaser-square:hover .description,.teaser-square:focus .description, .teaser-square:active .description  {
   transition: all $hover-time;
+  -webkit-transition: all $hover-time;
+  -moz-transition:  all $hover-time;
+  -ms-transition:  all $hover-time;
+  -o-transition:  all $hover-time;
   // overflow: scroll;
-  opacity: 1;
+  opacity: .99;
   // padding: $desc-pad;
-  padding-top: $desc-pad*.8 ;
+  //padding-top: $desc-pad*.8 ;
   // transform: scale($hover-scale);
+  transform: translateY(0%);
 }
 
 .client {
@@ -311,14 +343,21 @@ $spin-time: 2s;
 }
 
 .teaser-square img {
+  position:absolute;
   min-width: 100%;
   min-height: 100%;
 }
 
 .hidden-teaser {
-  opacity: 0;
+  opacity: .01;
   transition: all 1s;
   visibility: hidden;
+
+  transition: all 1;
+  -webkit-transition: all 1;
+  -moz-transition:  all 1;
+  -ms-transition:  all 1;
+  -o-transition:  all 1;
 }
 
 .shown-teaser {
