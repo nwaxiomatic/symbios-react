@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import ReactMarkdown from 'react-markdown'
 import PostPreview from 'components/PostPreview'
-import TagSelector from 'components/TagSelector'
+import TagSelectorSimple from 'components/TagSelectorSimple'
 import SymbiosLoader from 'components/SymbiosLoader'
 import Header from 'components/Header'
 
@@ -166,12 +166,14 @@ class Portfolio extends Component {
       var w = window.innerWidth
       var h = window.innerHeight
 
-      let newWidth = (w - .4*h) / w
+      // var menuWidth = Math.min(.2 * w, )
+
+      let newWidth = (w - .25*w) / w
       let newHeight = 100 / newWidth
       let offHeight = 50 * (1 - newWidth)
       root.style.setProperty(
         '--scale-filter',
-        'translate(40vh, -' + offHeight.toString() + 'vh) scale(' + newWidth.toString() + ')'
+        'translate(25vw, -' + offHeight.toString() + 'vh) scale(' + newWidth.toString() + ')'
       )
       root.style.setProperty(
         '--scale-filter-height',
@@ -347,18 +349,18 @@ class Portfolio extends Component {
         <Container className="ox-cont">
         <div className={"tagKnobs " + (menu && "tagKnobs-slide")}>
           <div className="port-shad-cont"><div className="port-shad"/></div>
-          <div className="tag-selector-knobs">
-            {/*Object.keys(tags).map( tagType =>
-              <TagSelector
-                key={tagType}
+          <div className="tag-selector-knobs noselect">
+            {/*Object.keys(tags).map( tagType =>*/}
+              <TagSelectorSimple
+                key='categories'
                 tags={tags}
                 tagSelect={tagSelect}
-                tagType={tagType}
+                tagType={'categories'}
                 getTime={getTime}
                 animDelay={animDelay}
                 animLength={animLength}
               />
-            )*/}
+            {/*})*/}
           </div>
         </div>
         <div 

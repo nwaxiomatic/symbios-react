@@ -177,7 +177,7 @@ $spin-time: 2s;
   //       -1*$h1 -1*$h1 $blur1 hsl(180,$lightSat,$valLight),
   //       $h1 $h1 $blur1 hsl(180,$shadSat,$valDark);
 
-  animation-name: rainbow-shadow;
+  animation-name: rainbow-shadow-md;
   animation-duration: $rainbowTime;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -234,7 +234,7 @@ $spin-time: 2s;
 
   mix-blend-mode: normal;
 
-  animation-name: rainbow-shadow-md;
+  animation-name: rainbow-shadow-sm;
   animation-duration: $rainbowTime;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;

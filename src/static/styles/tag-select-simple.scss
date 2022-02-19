@@ -1,0 +1,156 @@
+@import "static/styles/neumorph"; 
+// @import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/bootstrap";
+
+$menu-width: 25vw;
+$tag-width: $menu-width - 10vw;
+
+$railFrac: .1;
+$railThick: $railFrac * 100%;
+$knobSize: 20vh;
+
+$circleSize: 4vh;
+$circlePerc: .6;
+$rotRad: $knobSize * (1-2*$railFrac) - $circleSize * 1;
+$circleFix: $circleSize * (1-$circlePerc) / 2;
+
+$tsInner-z: 200;
+
+// @keyframes spin {
+//   100% {
+//     transform:rotate(1turn) translate($rotRad/2) rotate(-1turn);
+//   }
+// }
+
+
+// @include media-breakpoint-up(md) {
+  .tagKnobs {
+    width: $menu-width;
+  }
+  .tagSelector {
+    width: $tag-width;
+    // height: $knobSize;
+    height: 100vh;
+  }
+// }
+
+// @include media-breakpoint-down(md) {
+//   .tagKnobs {
+//     width: 50vw;
+//   }
+//   .tagSelector {
+//     width: $knobSize * 1.8;
+//     height: $knobSize * 1.8;
+//   }
+// }
+
+
+.tagKnobs {
+  height: 100vh;
+  position: fixed;
+  // top: 10vh;
+  left: 0;
+  transform: translate(-200%, 0%) scale(1);
+  transition: transform $swipe-time;
+}
+
+.tagKnobs .tag-selector-knobs {
+  transform: translate(0, 0%);
+  transition: transform $swipe-time;
+}
+
+.tagKnobs-slide {
+  transform: translate(0%, 0%) scale(1);
+}
+
+.tagKnobs-slide .tag-selector-knobs {
+  transform: translate(0%, 0%);
+}
+
+.tagSelector {
+  position: relative;
+  // top: 10vmin;
+  left: 2.5vw;
+  // z-index: 99999;
+  // margin-bottom: 10vh;
+  // margin-right: 0;
+  // z-index: 1;
+}
+
+
+.tagKnob {
+  width: 100%;
+  height: 100%;
+  position: default;
+}
+
+.tagSelectInnerTitleText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  overflow-wrap: break-word;
+  font-size: 1.2em;
+}
+
+.tagItem, .tagSelectInnerTitleText {
+  display: block;
+  position: absolute;
+  // z-index: 10000;
+
+  text-align: center;
+  transform: translate(0, -50%);
+}
+
+.tagItemButton {
+  // background: red;
+  width: $tag-width;
+  height: $tag-width / 3;
+  border-radius: 16% 6% / 48% 18%;
+
+  animation-name: rainbow-shadow-md;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.tagItemButton, .tagSelectInnerTitleText {
+  // animation-name: rainbow-text;
+  // animation-duration: $rainbowTime;
+  // animation-timing-function: ease-in-out;
+  // animation-iteration-count: infinite;
+  color: #999;
+  font-weight: 900;
+  font-size: 2.2vw;
+}
+
+.tagSelected {
+  // animation-name: rainbow-text-glow-inset;
+  // animation-duration: $rainbowTime;
+  // animation-timing-function: ease-in-out;
+  // animation-iteration-count: infinite;
+  // color: $light-color;
+  color: hsl(10, 90%, 80%);
+  // text-shadow: 0 0 5px $glow-color;
+  text-shadow: 0 0 .8vw hsl(10, 90%, 80%);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+
+  animation-name: rainbow-inset-shadow-md;
+  animation-duration: $rainbowTime;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+// @-webkit-keyframes glow {
+//    @for $i from 0 through 10 {
+//     #{$i / $hueSteps * 100%} {
+//   from {
+//     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+//   }
+//   to {
+//     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+//   }
+// }

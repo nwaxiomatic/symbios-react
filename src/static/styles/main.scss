@@ -2,8 +2,18 @@
 @import "~bootstrap/scss/bootstrap";
 
 :root {
-  --scale-filter: translate(40vh, -15vh) scale(1);
+  --scale-filter: translate(20vw, -15vh) scale(1);
   --scale-filter-height: 100vh;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 #turbFilter {
@@ -116,6 +126,7 @@ button, input[type="submit"], input[type="reset"] {
   right: 0;
   width: 5vh;
   height: 100vh;
+    z-index: 9999999999;
   filter: url(#filter) ;
 }
 

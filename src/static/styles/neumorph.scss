@@ -9,7 +9,7 @@ $font-color: hsl(30, 90, 50);
 $sat: 0;
 $shadSat: 10;
 $lightSat: 60;
-$val: 85;
+$val: 82;
 $valDelta: 10;
 $valDark: $val - 3*$valDelta;
 // $valLight: $val + 1.2*$valDelta;
@@ -23,6 +23,8 @@ $hueMax: 260;
 $hueSteps: 6;
 
 $swipe-time: .5s;
+
+$glow-color: #fcc;
 
 .luminosity {
   // mix-blend-mode: luminosity;
@@ -222,11 +224,11 @@ $swipe-time: .5s;
 }
 @keyframes rainbow-text-glow {
   // @include rainbow('color');
-  @include rainbow-shadow-glow(.1, #fcc, 'text-shadow');
+  @include rainbow-shadow-glow(.1, $glow-color, 'text-shadow');
 }
 @keyframes rainbow-text-glow-inset {
   // @include rainbow('color');
-  @include rainbow-shadow-glow(-.06, #fcc, 'text-shadow');
+  @include rainbow-shadow-glow(-.06, $glow-color, 'text-shadow');
 }
 @keyframes rainbow-text-invert {
   // @include rainbow('color');

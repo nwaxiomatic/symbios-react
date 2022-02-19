@@ -28,14 +28,7 @@ class SquareImg extends Component {
     // if(img)
       return (
         <span>
-           <div 
-            className='teaser-square-shadow saturation' 
-            style={animDelay([animLength])}
-          />
-          <div 
-            className='teaser-square-shadow luminosity' 
-            style={animDelay([animLength])}
-          />
+
 
 
           <span className={"spinners-all " + (img ? 'hidden-spin' :'')}>
@@ -65,11 +58,7 @@ class SquareImg extends Component {
             style={animDelay([animLength])}
           >
             <span className={"hidden " + (img ? 'shown' :'')}>
-               <div 
-                className="description"
-              >
-                {data.blurb}
-              </div>
+              
               <div className='teaser-square-cover' />
               { img ? 
                 <div
@@ -82,6 +71,11 @@ class SquareImg extends Component {
                   }}
                 /> : ''
               }
+               <div 
+                className="description"
+              >
+                {data.blurb}
+              </div>
             </span>
           </div>
 
