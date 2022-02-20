@@ -59,7 +59,7 @@ class SquareImg extends Component {
           >
             <span className={"hidden " + (img ? 'shown' :'')}>
               
-              <div className='teaser-square-cover' />
+              
               { img ? 
                 <div
                   className='teaser-img'

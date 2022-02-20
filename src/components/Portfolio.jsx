@@ -17,6 +17,12 @@ import * as matter from 'gray-matter'
 import { getSC } from 'SoundCloudAPI'
 import { getVimeo } from 'VimeoAPI'
 
+// import raw from 'raw.macro'
+
+// import raw from 'static/md/main.md'
+
+// console.log(require(raw))
+
 // import * as twglr from 'twgl'
 // const twgl = twglr.twgl
 
@@ -27,12 +33,31 @@ function findCommonElements(arr1, arr2) {
 }
 
 
+// const cache = {};
+
+// function importAll(r) {
+//   r.keys().forEach((key) => (cache[key] = r(key)));
+// }
+
+// importAll(require.context('static/md/posts/', true, /\.md$/));
+// console.log(cache)
+
+//  Object.keys(cache).forEach((key) => require('static/md/posts/' + key));
+
 // Process .md files
 const mdFilesRaw = require.context(
   '!!raw-loader!static/md/posts', 
   true,
   /\.md$/ 
 )
+// console.log(mdFilesRaw
+const mdmdtest = mdFilesRaw.keys().map( 
+  path => (
+    mdFilesRaw(path)
+  )
+)
+console.log(mdmdtest)
+
 const mdFiles = mdFilesRaw.keys().map( 
   path => ( {
     ...matter(mdFilesRaw(path).default),

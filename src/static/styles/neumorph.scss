@@ -3,8 +3,10 @@ $blur1: 22px;
 $colLight: hsl(50, 0, 100);
 $colDark: #9ca4a4;
 
-$light-color: hsl(10, 100, 90);
-$font-color: hsl(30, 90, 50);
+// $light-color: hsl(10, 100, 90);
+$light-color: hsl(10, 90, 70);
+// $font-color: hsl(30, 90, 50);
+$font-color: $light-color;
 
 $sat: 0;
 $shadSat: 10;
@@ -24,7 +26,8 @@ $hueSteps: 6;
 
 $swipe-time: .5s;
 
-$glow-color: #fcc;
+// $glow-color: #fcc;
+$glow-color: hsl(10, 90%, 80%);
 
 .luminosity {
   // mix-blend-mode: luminosity;
